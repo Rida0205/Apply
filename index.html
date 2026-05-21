@@ -13,143 +13,94 @@
         }
 
         body {
-            background: linear-gradient(145deg, #f9fafc 0%, #f0f2f5 100%);
-            font-family: 'Noto Naskh Arabic', 'Tajawal', system-ui, -apple-system, sans-serif;
-            padding: 24px 20px;
+            background: linear-gradient(135deg, #e8f0f5 0%, #d9e2e9 100%);
+            font-family: 'Noto Naskh Arabic', 'Tajawal', system-ui, sans-serif;
+            padding: 20px;
             min-height: 100vh;
         }
 
-        /* الحاوية الرئيسية - تصميم أنيق فاتح */
         .container {
-            max-width: 800px;
-            width: 100%;
+            max-width: 750px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 56px;
-            padding: 36px 32px;
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.02);
-            transition: all 0.3s;
+            background: #ffffff;
+            border-radius: 48px;
+            padding: 40px 35px;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.12);
         }
 
         /* الهيدر */
-        .header {
+        .logo {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 30px;
         }
-        .header h1 {
-            background: linear-gradient(135deg, #2d6a4f, #1b4d3e);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            font-size: 2.1rem;
+        .logo h1 {
+            font-size: 2.2rem;
+            color: #1a472a;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
         }
-        .header p {
-            color: #5a6e7a;
+        .logo p {
+            color: #5a6874;
             font-size: 0.85rem;
-            margin-top: 10px;
+            margin-top: 8px;
         }
-        .qari-badge {
-            background: #eef2f5;
+        .qari-name {
+            background: #eef3f7;
             display: inline-block;
-            padding: 6px 22px;
+            padding: 6px 24px;
             border-radius: 60px;
-            color: #2d6a4f;
-            font-size: 0.75rem;
-            margin-top: 14px;
+            color: #1a472a;
+            font-size: 0.8rem;
+            margin-top: 12px;
             font-weight: 500;
-            border: 1px solid #dce3e9;
-        }
-
-        /* أزرار اختيار الدقة */
-        .resolution-section {
-            display: flex;
-            gap: 18px;
-            justify-content: center;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-        }
-        .res-btn {
-            background: #ffffff;
-            border: 1.5px solid #dce3e9;
-            padding: 12px 28px;
-            border-radius: 60px;
-            color: #2c3e4e;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-        }
-        .res-btn.active {
-            background: #2d6a4f;
-            border-color: #2d6a4f;
-            color: white;
-            box-shadow: 0 4px 10px rgba(45, 106, 79, 0.15);
-        }
-        .res-btn:hover {
-            transform: translateY(-2px);
-            border-color: #2d6a4f;
         }
 
         /* بطاقة اختيار الآيات */
-        .verses-card {
-            background: #ffffff;
-            border-radius: 36px;
-            padding: 24px;
-            margin-bottom: 28px;
-            border: 1px solid #eef2f8;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        .selection-card {
+            background: #f8fafc;
+            border-radius: 32px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #e2e8f0;
         }
         .card-title {
-            color: #2d6a4f;
-            font-size: 0.95rem;
+            color: #1a472a;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 20px;
-            border-right: 3px solid #2d6a4f;
+            margin-bottom: 18px;
             padding-right: 14px;
+            border-right: 3px solid #2d6a4f;
         }
         .verse-range {
             display: flex;
-            gap: 16px;
+            gap: 15px;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
         }
         .verse-range select {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            background: white;
+            border: 1px solid #cbd5e1;
             padding: 14px 20px;
             border-radius: 60px;
             color: #1e2a3a;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             cursor: pointer;
             flex: 1;
-            min-width: 150px;
+            min-width: 160px;
             text-align: center;
-            transition: all 0.2s;
-        }
-        .verse-range select:focus {
-            outline: none;
-            border-color: #2d6a4f;
         }
         .arrow-icon {
             color: #2d6a4f;
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.3rem;
         }
 
-        /* زر الإنشاء الرئيسي */
+        /* زر الإنشاء */
         .generate-btn {
             width: 100%;
-            background: linear-gradient(135deg, #2d6a4f, #1b4d3e);
+            background: #2d6a4f;
             border: none;
             padding: 18px;
             border-radius: 60px;
@@ -158,177 +109,147 @@
             font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.2s;
-            margin: 16px 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            box-shadow: 0 6px 14px rgba(45, 106, 79, 0.25);
-        }
-        .generate-btn:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.03);
-            box-shadow: 0 10px 20px rgba(45, 106, 79, 0.3);
-        }
-        .generate-btn:disabled {
-            opacity: 0.65;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* ========== منطقة الانتظار التفاعلية (أنيقة وخفيفة) ========== */
-        .waiting-area {
-            background: #ffffff;
-            border-radius: 44px;
-            padding: 32px 24px;
-            margin-top: 24px;
-            text-align: center;
-            border: 1px solid #eef2f8;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-            transition: all 0.3s;
-        }
-        .waiting-area.hidden {
-            display: none;
-        }
-        .waiting-title {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: #2d6a4f;
-            margin-bottom: 20px;
+            margin: 15px 0 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
         }
-        .istighfar-counter {
-            background: #f1f5f9;
-            padding: 18px 16px;
-            border-radius: 80px;
-            font-size: 1.25rem;
-            color: #1e3a2f;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin: 16px 0;
-            font-family: 'Noto Naskh Arabic', monospace;
+        .generate-btn:hover {
+            background: #1f543d;
+            transform: translateY(-2px);
+        }
+        .generate-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* منطقة الانتظار */
+        .progress-area {
+            background: #f8fafc;
+            border-radius: 36px;
+            padding: 30px 25px;
+            margin-top: 20px;
+            text-align: center;
             border: 1px solid #e2e8f0;
+            display: none;
+        }
+        .progress-area.show {
+            display: block;
+        }
+        .loading-title {
+            color: #1a472a;
+            font-size: 1rem;
+            margin-bottom: 20px;
         }
         .progress-bar {
-            background: #e9eef3;
+            background: #e2e8f0;
             border-radius: 60px;
             height: 8px;
-            margin: 22px 0;
+            margin: 20px 0;
             overflow: hidden;
         }
         .progress-fill {
-            background: linear-gradient(90deg, #2d6a4f, #40916c);
+            background: #2d6a4f;
             width: 0%;
             height: 100%;
-            transition: width 0.25s ease-out;
+            transition: width 0.3s;
             border-radius: 60px;
         }
-        .waiting-message {
-            color: #5a6e7a;
-            font-size: 0.8rem;
-            margin: 18px 0 8px;
-            line-height: 1.6;
+        .istighfar {
+            font-size: 1.2rem;
+            color: #1a472a;
+            font-weight: 600;
+            margin: 15px 0;
+            padding: 12px;
+            background: white;
+            border-radius: 80px;
+            border: 1px solid #e2e8f0;
         }
-        .status-text {
-            color: #2d6a4f;
-            font-size: 0.85rem;
-            font-weight: 500;
+        .wait-message {
+            color: #6c7a8a;
+            font-size: 0.8rem;
+            margin-top: 15px;
+        }
+        .extra-notice {
+            color: #d97706;
+            font-size: 0.75rem;
             margin-top: 12px;
         }
-        .note-small {
-            font-size: 0.7rem;
-            color: #8aa0ae;
-            margin-top: 16px;
+        .status-msg {
+            color: #2d6a4f;
+            font-size: 0.85rem;
+            margin-top: 12px;
+            font-weight: 500;
         }
 
         footer {
             text-align: center;
-            margin-top: 32px;
+            margin-top: 30px;
             color: #8ba0ae;
             font-size: 0.7rem;
+            padding-top: 20px;
             border-top: 1px solid #eef2f8;
-            padding-top: 22px;
-        }
-
-        @media (max-width: 650px) {
-            .container { padding: 24px 18px; }
-            .res-btn { padding: 9px 18px; font-size: 0.8rem; }
-            .verse-range select { padding: 11px 14px; font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header">
+    <div class="logo">
         <h1>🕌 آيات 🎥</h1>
-        <p>حوِّل تلاوة سورة الفاتحة إلى فيديو احترافي بمزامنة دقيقة</p>
-        <div class="qari-badge">🎙️ الشيخ علي جابر رحمه الله</div>
+        <p>أنشئ فيديو بتلاوة القرآن بمزامنة دقيقة</p>
+        <div class="qari-name">🎙️ الشيخ علي جابر - سورة الفاتحة</div>
     </div>
 
-    <!-- اختيار الدقة -->
-    <div class="resolution-section">
-        <div class="res-btn" data-res="youtube" id="youtubeBtn">
-            📺 يوتيوب (16:9)
-        </div>
-        <div class="res-btn" data-res="reels" id="reelsBtn">
-            📱 ريلز / شورتس (9:16)
-        </div>
-    </div>
-
-    <!-- اختيار الآيات -->
-    <div class="verses-card">
-        <div class="card-title">📖 اختيار الآيات (من → إلى)</div>
+    <div class="selection-card">
+        <div class="card-title">📖 اختيار الآيات</div>
         <div class="verse-range">
             <select id="fromVerse">
-                <option value="1">١ - البسملة</option>
-                <option value="2">٢ - الحمد لله</option>
-                <option value="3">٣ - الرحمن الرحيم</option>
-                <option value="4">٤ - مالك يوم الدين</option>
-                <option value="5">٥ - إياك نعبد</option>
-                <option value="6">٦ - اهدنا الصراط</option>
-                <option value="7">٧ - صراط الذين</option>
+                <option value="1">من الآية ١ (البسملة)</option>
+                <option value="2">من الآية ٢ (الحمد لله)</option>
+                <option value="3">من الآية ٣ (الرحمن الرحيم)</option>
+                <option value="4">من الآية ٤ (مالك يوم الدين)</option>
+                <option value="5">من الآية ٥ (إياك نعبد)</option>
+                <option value="6">من الآية ٦ (اهدنا الصراط)</option>
+                <option value="7">من الآية ٧ (صراط الذين)</option>
             </select>
             <span class="arrow-icon">←</span>
             <select id="toVerse">
-                <option value="1">١</option><option value="2">٢</option><option value="3">٣</option>
-                <option value="4">٤</option><option value="5">٥</option><option value="6">٦</option>
+                <option value="1">١</option>
+                <option value="2">٢</option>
+                <option value="3">٣</option>
+                <option value="4">٤</option>
+                <option value="5">٥</option>
+                <option value="6">٦</option>
                 <option value="7" selected>٧</option>
             </select>
         </div>
     </div>
 
-    <!-- زر الإنشاء -->
-    <button id="generateBtn" class="generate-btn">
-        🎬 إنشاء الفيديو وتحميله
+    <button class="generate-btn" id="generateBtn">
+        🎬 إنشاء الفيديو
     </button>
 
-    <!-- منطقة الانتظار التفاعلية (تظهر فقط أثناء التجهيز) -->
-    <div id="waitingArea" class="waiting-area hidden">
-        <div class="waiting-title">
-            <span>⏳</span> جاري تحضير الفيديو <span>✨</span>
-        </div>
+    <div class="progress-area" id="progressArea">
+        <div class="loading-title">⏳ جاري إنشاء الفيديو</div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
-        <div class="istighfar-counter" id="istighfarCounter">أستغفر الله ٠</div>
-        <div class="waiting-message" id="waitingMessage">
-            🤲 املأ وقت الانتظار بالاستغفار والصلاة على النبي 🤲
-        </div>
-        <div class="status-text" id="statusText"></div>
-        <div class="note-small" id="extraNote"></div>
+        <div class="istighfar" id="istighfarText">أستغفر الله ٠</div>
+        <div class="wait-message" id="waitMessage">🤲 املأ وقت الانتظار بالاستغفار والصلاة على النبي 🤲</div>
+        <div class="extra-notice" id="extraNotice"></div>
+        <div class="status-msg" id="statusMsg"></div>
     </div>
 
     <footer>
-        ✅ مزامنة دقيقة مع تلاوة الشيخ علي جابر | خلفية سوداء | خط عثماني
+        ✅ فيديو بخلفية سوداء | خط عثماني | جودة عالية
     </footer>
 </div>
 
 <script>
-    // ------------------- بيانات سورة الفاتحة بتوقيتات دقيقة -------------------
+    // بيانات الآيات مع التوقيتات الدقيقة
     const versesData = {
         1: { text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", start: 5.884, end: 13.407 },
         2: { text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", start: 13.407, end: 21.520 },
@@ -340,38 +261,19 @@
     };
 
     const audioUrl = "https://download.quranicaudio.com/quran/ali_jaber//001.mp3";
-    
-    let currentResolution = "youtube";
-    
-    // عناصر dom
-    const youtubeBtn = document.getElementById('youtubeBtn');
-    const reelsBtn = document.getElementById('reelsBtn');
+
     const fromSelect = document.getElementById('fromVerse');
     const toSelect = document.getElementById('toVerse');
     const generateBtn = document.getElementById('generateBtn');
-    const waitingArea = document.getElementById('waitingArea');
+    const progressArea = document.getElementById('progressArea');
     const progressFill = document.getElementById('progressFill');
-    const istighfarCounter = document.getElementById('istighfarCounter');
-    const waitingMessage = document.getElementById('waitingMessage');
-    const statusText = document.getElementById('statusText');
-    const extraNote = document.getElementById('extraNote');
-    
+    const istighfarText = document.getElementById('istighfarText');
+    const statusMsg = document.getElementById('statusMsg');
+    const extraNotice = document.getElementById('extraNotice');
+
     let istighfarCount = 0;
     let istighfarInterval = null;
-    
-    // تبديل الدقة
-    youtubeBtn.addEventListener('click', () => {
-        currentResolution = "youtube";
-        youtubeBtn.classList.add('active');
-        reelsBtn.classList.remove('active');
-    });
-    reelsBtn.addEventListener('click', () => {
-        currentResolution = "reels";
-        reelsBtn.classList.add('active');
-        youtubeBtn.classList.remove('active');
-    });
-    youtubeBtn.classList.add('active');
-    
+
     function getSelectedVerses() {
         const from = parseInt(fromSelect.value);
         const to = parseInt(toSelect.value);
@@ -381,172 +283,171 @@
         }
         return verses;
     }
-    
+
     function startIstighfar() {
         istighfarCount = 0;
         if (istighfarInterval) clearInterval(istighfarInterval);
         istighfarInterval = setInterval(() => {
             istighfarCount++;
-            istighfarCounter.textContent = `أستغفر الله ${istighfarCount}`;
-        }, 700);
+            istighfarText.textContent = `أستغفر الله ${istighfarCount}`;
+        }, 800);
     }
-    
+
     function stopIstighfar() {
-        if (istighfarInterval) { clearInterval(istighfarInterval); istighfarInterval = null; }
+        if (istighfarInterval) {
+            clearInterval(istighfarInterval);
+            istighfarInterval = null;
+        }
     }
-    
+
     function updateProgress(percent, message) {
         progressFill.style.width = `${Math.min(100, percent)}%`;
-        if (message) statusText.textContent = message;
+        if (message) statusMsg.textContent = message;
     }
-    
+
     async function generateVideo() {
         const verses = getSelectedVerses();
         if (verses.length === 0) {
-            statusText.textContent = "❌ الرجاء اختيار آيات صحيحة";
+            statusMsg.textContent = "الرجاء اختيار آيات صحيحة";
             return;
         }
-        
-        // إظهار رسالة إضافية إذا تجاوز عدد الآيات 20 (هنا 7 فقط لكن للتوضيح)
+
         if (verses.length > 20) {
-            extraNote.innerHTML = "📌 عدد الآيات كبير (أكثر من 20) قد يستغرق الفيديو دقيقة إضافية، نرجو الصبر";
+            extraNotice.textContent = "📌 عدد الآيات كبير (أكثر من 20) قد يستغرق الفيديو دقيقة إضافية، نرجو الصبر";
         } else {
-            extraNote.innerHTML = "";
+            extraNotice.textContent = "";
         }
-        
+
         generateBtn.disabled = true;
-        waitingArea.classList.remove('hidden');
+        progressArea.classList.add('show');
         startIstighfar();
-        updateProgress(5, "⏳ جاري تحميل التلاوة...");
-        
+        updateProgress(5, "جاري تحميل التلاوة...");
+
         try {
-            // تحميل الصوت
             const audioResponse = await fetch(audioUrl);
             if (!audioResponse.ok) throw new Error("فشل تحميل الصوت");
             const audioBlob = await audioResponse.blob();
             const audioLocalUrl = URL.createObjectURL(audioBlob);
-            
-            updateProgress(25, "🎨 تجهيز الفيديو...");
-            
-            // تحديد أبعاد الفيديو
-            let canvasWidth, canvasHeight;
-            if (currentResolution === "youtube") {
-                canvasWidth = 1280; canvasHeight = 720;
-            } else {
-                canvasWidth = 720; canvasHeight = 1280;
-            }
-            
+
+            updateProgress(20, "تجهيز الفيديو...");
+
+            // أبعاد يوتيوب ثابتة
             const canvas = document.createElement('canvas');
-            canvas.width = canvasWidth;
-            canvas.height = canvasHeight;
+            canvas.width = 1280;
+            canvas.height = 720;
             const ctx = canvas.getContext('2d');
-            
-            // خلفية سوداء وذهبي
-            const bgColor = "#000000";
-            const textColor = "#FFD700";
-            
+
             function drawVerse(text) {
-                ctx.fillStyle = bgColor;
+                ctx.fillStyle = "#000000";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 if (!text) return;
-                ctx.fillStyle = textColor;
-                ctx.font = `500 ${Math.floor(canvasWidth / 22)}px 'Noto Naskh Arabic', 'Amiri Quran', serif`;
+
+                ctx.fillStyle = "#FFD700";
+                ctx.font = `500 ${Math.floor(canvas.width / 22)}px 'Noto Naskh Arabic', 'Amiri Quran', serif`;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
-                
+
                 const maxWidth = canvas.width - 80;
                 const words = text.split(' ');
-                const lines = []; let currentLine = "";
+                const lines = [];
+                let currentLine = "";
+
                 for (const word of words) {
                     const testLine = currentLine + (currentLine ? " " : "") + word;
                     if (ctx.measureText(testLine).width > maxWidth && currentLine.length > 0) {
                         lines.push(currentLine);
                         currentLine = word;
-                    } else { currentLine = testLine; }
+                    } else {
+                        currentLine = testLine;
+                    }
                 }
                 if (currentLine) lines.push(currentLine);
+
                 const lineHeight = parseInt(ctx.font) * 1.4;
                 const startY = (canvas.height - (lines.length * lineHeight)) / 2;
                 lines.forEach((line, idx) => {
-                    ctx.fillText(line, canvas.width/2, startY + idx * lineHeight);
+                    ctx.fillText(line, canvas.width / 2, startY + idx * lineHeight);
                 });
             }
-            
+
             drawVerse(verses[0].text);
             const stream = canvas.captureStream(30);
-            
-            // إعداد الصوت
+
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             const audioElem = new Audio(audioLocalUrl);
             const source = audioCtx.createMediaElementSource(audioElem);
             const dest = audioCtx.createMediaStreamDestination();
             source.connect(dest);
             source.connect(audioCtx.destination);
-            
+
             const combinedStream = new MediaStream();
             stream.getVideoTracks().forEach(t => combinedStream.addTrack(t));
             dest.stream.getAudioTracks().forEach(t => combinedStream.addTrack(t));
-            
+
             const recorder = new MediaRecorder(combinedStream, { mimeType: 'video/webm' });
             const chunks = [];
-            recorder.ondataavailable = e => { if(e.data.size > 0) chunks.push(e.data); };
-            
+            recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+
             recorder.start();
             await audioCtx.resume();
             audioElem.play();
-            
+
             let currentVerse = -1;
-            const totalDuration = verses[verses.length-1].end;
-            
+            const totalDuration = verses[verses.length - 1].end;
+
             const syncLoop = () => {
-                const ct = audioElem.currentTime;
-                let newIdx = -1;
-                for(let i=0; i<verses.length; i++) {
-                    if(ct >= verses[i].start && ct <= verses[i].end) { newIdx = i; break; }
+                const currentTime = audioElem.currentTime;
+                let newIndex = -1;
+                for (let i = 0; i < verses.length; i++) {
+                    if (currentTime >= verses[i].start && currentTime <= verses[i].end) {
+                        newIndex = i;
+                        break;
+                    }
                 }
-                if(newIdx !== currentVerse) {
-                    currentVerse = newIdx;
+                if (newIndex !== currentVerse) {
+                    currentVerse = newIndex;
                     drawVerse(currentVerse !== -1 ? verses[currentVerse].text : "");
                 }
-                const percent = 25 + (ct / totalDuration) * 70;
-                updateProgress(percent, `🎙️ تسجيل الآيات... ${Math.floor(ct)}/${Math.floor(totalDuration)} ث`);
-                if(!audioElem.ended) requestAnimationFrame(syncLoop);
+                const percent = 20 + (currentTime / totalDuration) * 75;
+                updateProgress(percent, `جاري التسجيل... ${Math.floor(currentTime)}/${Math.floor(totalDuration)} ثانية`);
+                if (!audioElem.ended) requestAnimationFrame(syncLoop);
             };
             requestAnimationFrame(syncLoop);
-            
+
             await new Promise(resolve => { audioElem.onended = resolve; });
-            updateProgress(96, "📀 تجهيز الملف النهائي...");
-            setTimeout(() => { if(recorder.state === 'recording') recorder.stop(); }, 200);
+            updateProgress(96, "تجهيز الملف النهائي...");
+            setTimeout(() => { if (recorder.state === 'recording') recorder.stop(); }, 200);
             await new Promise(resolve => { recorder.onstop = resolve; });
-            
+
             const finalBlob = new Blob(chunks, { type: 'video/webm' });
             const url = URL.createObjectURL(finalBlob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `الفاتحة_${fromSelect.value}_الى_${toSelect.value}_${currentResolution}.webm`;
+            a.download = `الفاتحة_${fromSelect.value}_الى_${toSelect.value}.webm`;
             a.click();
-            
+
             URL.revokeObjectURL(audioLocalUrl);
             URL.revokeObjectURL(url);
             audioCtx.close();
-            
-            updateProgress(100, "✅ تم التحميل بنجاح!");
+
+            updateProgress(100, "تم التحميل بنجاح!");
             stopIstighfar();
             setTimeout(() => {
-                waitingArea.classList.add('hidden');
+                progressArea.classList.remove('show');
                 generateBtn.disabled = false;
-                updateProgress(0, "");
-                istighfarCounter.textContent = "أستغفر الله ٠";
-            }, 1800);
-            
-        } catch(err) {
-            console.error(err);
-            statusText.textContent = "❌ حدث خطأ: " + err.message;
+                progressFill.style.width = "0%";
+                istighfarText.textContent = "أستغفر الله ٠";
+                statusMsg.textContent = "";
+            }, 2000);
+
+        } catch (error) {
+            console.error(error);
+            statusMsg.textContent = "حدث خطأ، حاول مرة أخرى";
             stopIstighfar();
             generateBtn.disabled = false;
         }
     }
-    
+
     generateBtn.onclick = generateVideo;
 </script>
 </body>
