@@ -3,108 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آيات - سورة الفاتحة | تلاوة الشيخ علي جابر</title>
+    <title>آيات - فيديوهات القرآن | الشيخ علي جابر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            font-family: 'Tajawal', 'Segoe UI', system-ui, sans-serif;
-            padding: 20px;
+            background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+            font-family: 'Noto Naskh Arabic', 'Tajawal', system-ui, sans-serif;
+            padding: 24px;
             min-height: 100vh;
         }
+
+        /* تصميم أنيق وعصري */
         .container {
-            max-width: 800px;
+            max-width: 1100px;
             margin: 0 auto;
-            background: rgba(15, 23, 42, 0.95);
-            border-radius: 40px;
-            padding: 25px;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.3);
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 48px;
+            padding: 28px;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5);
         }
-        h1 { text-align: center; color: #fbbf24; font-size: 1.8rem; margin-bottom: 5px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .sub { text-align: center; color: #94a3b8; margin-bottom: 25px; font-size: 0.85rem; }
-        .qari-badge { background: #1e293b; text-align: center; padding: 8px; border-radius: 60px; margin-bottom: 20px; color: #86efac; font-weight: bold; font-size: 0.9rem; }
-        .card { background: #0f172a; border-radius: 24px; padding: 20px; margin-bottom: 20px; }
-        .card-title { color: #facc15; margin-bottom: 15px; font-size: 1.1rem; border-right: 3px solid #facc15; padding-right: 12px; }
-        .control-group { margin-bottom: 18px; }
-        label { display: block; color: #cbd5e1; font-size: 0.85rem; margin-bottom: 8px; font-weight: bold; }
-        select, input[type="color"], input[type="range"] {
-            width: 100%;
-            padding: 12px 16px;
+
+        /* الهيدر */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #ffd700;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .header p {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+        .qari-name {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            display: inline-block;
+            padding: 6px 20px;
             border-radius: 60px;
-            border: none;
-            background: #1e293b;
-            color: white;
-            font-family: inherit;
-            font-size: 0.95rem;
-            cursor: pointer;
+            color: #86efac;
+            font-size: 0.8rem;
+            margin-top: 12px;
+            border: 1px solid #2d3a4e;
         }
-        input[type="color"] { height: 45px; padding: 5px; }
-        .verse-range { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; }
-        .verse-range select { flex: 1; }
-        button {
-            width: 100%;
-            padding: 16px;
-            background: #10b981;
-            border: none;
+
+        /* أزرار اختيار الدقة */
+        .resolution-section {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .res-btn {
+            background: #1e293b;
+            border: 2px solid #334155;
+            padding: 14px 32px;
             border-radius: 60px;
             color: white;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.2s;
-            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        button:hover { background: #059669; transform: scale(1.02); }
-        button:disabled { background: #475569; cursor: not-allowed; transform: none; }
-        .status {
-            margin-top: 15px;
-            padding: 12px;
+        .res-btn.active {
+            background: #ffd700;
+            color: #0f172a;
+            border-color: #ffd700;
+        }
+        .res-btn:hover {
+            transform: scale(1.02);
+            border-color: #ffd700;
+        }
+
+        /* اختيار الآيات */
+        .verses-card {
+            background: #0f172a;
+            border-radius: 32px;
+            padding: 22px;
+            margin-bottom: 25px;
+        }
+        .card-title {
+            color: #ffd700;
+            font-size: 1rem;
+            margin-bottom: 18px;
+            border-right: 3px solid #ffd700;
+            padding-right: 14px;
+        }
+        .verse-range {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .verse-range select {
+            background: #1e293b;
+            border: none;
+            padding: 14px 24px;
             border-radius: 60px;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            flex: 1;
+            min-width: 150px;
             text-align: center;
-            font-size: 0.85rem;
+        }
+        .arrow-icon {
+            color: #ffd700;
+            font-size: 1.5rem;
+        }
+
+        /* معاينة الفيديو */
+        .preview-section {
+            background: #000000;
+            border-radius: 32px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .preview-label {
+            color: #9ca3af;
+            font-size: 0.75rem;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        .preview-box {
+            background: #000;
+            border-radius: 24px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 280px;
+            border: 1px solid #2d3a4e;
+        }
+        #videoPreview {
+            width: 100%;
+            max-width: 100%;
+            max-height: 500px;
+            background: black;
+        }
+
+        /* زر الإنشاء */
+        .generate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ffd700, #f59e0b);
+            border: none;
+            padding: 18px;
+            border-radius: 60px;
+            color: #0f172a;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .generate-btn:hover {
+            transform: scale(1.01);
+            filter: brightness(1.05);
+        }
+        .generate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* حالة الانتظار مع الاستغفار */
+        .waiting-area {
+            background: #0f172a;
+            border-radius: 32px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .waiting-area.hidden {
             display: none;
         }
-        .status.loading { background: #1e3a5f; color: #7dd3fc; display: block; }
-        .status.success { background: #14532d; color: #86efac; display: block; }
-        .status.error { background: #7f1a1a; color: #fca5a5; display: block; }
-        .info { text-align: center; color: #475569; font-size: 0.7rem; margin-top: 20px; }
-        .footer { text-align: center; margin-top: 15px; font-size: 0.7rem; color: #334155; }
+        .istighfar-counter {
+            font-size: 1.2rem;
+            color: #86efac;
+            font-family: monospace;
+            letter-spacing: 2px;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            background: #1e293b;
+            border-radius: 60px;
+            height: 6px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: #ffd700;
+            width: 0%;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        .waiting-message {
+            color: #9ca3af;
+            font-size: 0.75rem;
+            margin-top: 12px;
+        }
+        .status-text {
+            color: #ffd700;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #334155;
+            font-size: 0.7rem;
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 18px; }
+            .res-btn { padding: 10px 20px; font-size: 0.8rem; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🕌 آيات - سورة الفاتحة 🎥</h1>
-    <div class="sub">إنشاء فيديو بمزامنة دقيقة مع تلاوة الشيخ علي جابر</div>
-    <div class="qari-badge">🎙️ الشيخ علي جابر رحمه الله - تلاوة خاشعة</div>
+    <div class="header">
+        <h1>🕌 آيات 🎥</h1>
+        <p>تحويل تلاوة القرآن إلى فيديوهات احترافية</p>
+        <div class="qari-name">🎙️ الشيخ علي جابر رحمه الله - سورة الفاتحة</div>
+    </div>
 
-    <div class="card">
-        <div class="card-title">🎨 تخصيص المظهر</div>
-        <div class="control-group">
-            <label>لون الخلفية</label>
-            <input type="color" id="bgColor" value="#0b1120">
+    <!-- اختيار الدقة -->
+    <div class="resolution-section">
+        <div class="res-btn" data-res="youtube" id="youtubeBtn">
+            📺 يوتيوب (16:9)
         </div>
-        <div class="control-group">
-            <label>لون النص</label>
-            <input type="color" id="textColor" value="#facc15">
-        </div>
-        <div class="control-group">
-            <label>حجم الخط: <span id="fontSizeValue">44</span> px</label>
-            <input type="range" id="fontSize" min="24" max="80" value="44" step="2">
+        <div class="res-btn" data-res="reels" id="reelsBtn">
+            📱 ريلز / شورتس (9:16)
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-title">📖 اختيار الآيات (من → إلى)</div>
+    <!-- اختيار الآيات -->
+    <div class="verses-card">
+        <div class="card-title">📖 اختيار الآيات</div>
         <div class="verse-range">
             <select id="fromVerse">
-                <option value="1">1 - البسملة</option><option value="2">2 - الحمد لله</option>
-                <option value="3">3 - الرحمن الرحيم</option><option value="4">4 - مالك يوم الدين</option>
-                <option value="5">5 - إياك نعبد</option><option value="6">6 - اهدنا الصراط</option>
-                <option value="7">7 - صراط الذين</option>
+                <option value="1">من الآية 1 (البسملة)</option>
+                <option value="2">من الآية 2 (الحمد لله)</option>
+                <option value="3">من الآية 3 (الرحمن الرحيم)</option>
+                <option value="4">من الآية 4 (مالك يوم الدين)</option>
+                <option value="5">من الآية 5 (إياك نعبد)</option>
+                <option value="6">من الآية 6 (اهدنا الصراط)</option>
+                <option value="7">من الآية 7 (صراط الذين)</option>
             </select>
-            <span style="color:white; font-size:18px;">← إلى ←</span>
+            <span class="arrow-icon">←</span>
             <select id="toVerse">
                 <option value="1">1</option><option value="2">2</option><option value="3">3</option>
                 <option value="4">4</option><option value="5">5</option><option value="6">6</option>
@@ -113,94 +287,185 @@
         </div>
     </div>
 
-    <button id="generateBtn">🎬 إنشاء الفيديو وتحميله (مع الصوت)</button>
-    <div id="status" class="status"></div>
-    <div class="info">✅ يعتمد على توقيتات دقيقة من ملف segments.json للشيخ علي جابر</div>
-    <div class="footer">الأداة تعمل محلياً | الفيديو يُنشأ في متصفحك مباشرة</div>
+    <!-- معاينة الفيديو -->
+    <div class="preview-section">
+        <div class="preview-label">📺 معاينة حية (أثناء الإنشاء)</div>
+        <div class="preview-box">
+            <video id="videoPreview" autoplay muted playsinline></video>
+        </div>
+    </div>
+
+    <!-- زر الإنشاء -->
+    <button id="generateBtn" class="generate-btn">
+        🎬 إنشاء الفيديو وتحميله
+    </button>
+
+    <!-- منطقة الانتظار مع الاستغفار -->
+    <div id="waitingArea" class="waiting-area hidden">
+        <div style="color:#ffd700;">⏳ جاري إنشاء الفيديو...</div>
+        <div class="istighfar-counter" id="istighfarCounter">أستغفر الله 0</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="waiting-message" id="waitingMessage">
+            🔄 إذا كانت الآيات كثيرة قد يستغرق الفيديو بعض الوقت
+        </div>
+        <div class="status-text" id="statusText"></div>
+    </div>
+
+    <footer>
+        ✅ المزامنة دقيقة مع تلاوة الشيخ علي جابر | خلفية سوداء | خط عثماني
+    </footer>
 </div>
 
 <script>
-    // ==================== بيانات سورة الفاتحة من ملفاتك ====================
-    // الآية 7: "صراط الذين..." تم دمجها في كائن واحد
+    // ==================== بيانات سورة الفاتحة من توقيتات علي جابر ====================
+    // تم إضافة البسملة (الآية 1) بشكل صحيح
     const versesData = {
-        1: { text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", start: 5.884, end: 13.407 },     // timestamp_from: 5884, to: 13407
-        2: { text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", start: 13.407, end: 21.520 },    // 13407 to 21520
-        3: { text: "الرَّحْمَٰنِ الرَّحِيمِ", start: 21.520, end: 26.630 },                  // 21520 to 26630
-        4: { text: "مَالِكِ يَوْمِ الدِّينِ", start: 26.630, end: 31.353 },                  // 26630 to 31353
-        5: { text: "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ", start: 31.353, end: 39.195 }, // 31353 to 39195
-        6: { text: "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ", start: 39.195, end: 45.519 },        // 39195 to 45519
-        7: { text: "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ", start: 45.519, end: 63.000 }  // 45519 to 63000
+        1: { text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", start: 5.884, end: 13.407 },
+        2: { text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", start: 13.407, end: 21.520 },
+        3: { text: "الرَّحْمَٰنِ الرَّحِيمِ", start: 21.520, end: 26.630 },
+        4: { text: "مَالِكِ يَوْمِ الدِّينِ", start: 26.630, end: 31.353 },
+        5: { text: "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ", start: 31.353, end: 39.195 },
+        6: { text: "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ", start: 39.195, end: 45.519 },
+        7: { text: "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ", start: 45.519, end: 63.000 }
     };
 
-    // رابط التلاوة من ملفك الأول
     const audioUrl = "https://download.quranicaudio.com/quran/ali_jaber//001.mp3";
-
-    // دوال مساعدة
+    
+    // الدقة المختارة
+    let currentResolution = "youtube"; // youtube = 1280x720, reels = 720x1280
+    
+    // عناصر DOM
+    const youtubeBtn = document.getElementById('youtubeBtn');
+    const reelsBtn = document.getElementById('reelsBtn');
+    const fromVerseSelect = document.getElementById('fromVerse');
+    const toVerseSelect = document.getElementById('toVerse');
+    const generateBtn = document.getElementById('generateBtn');
+    const waitingArea = document.getElementById('waitingArea');
+    const istighfarCounter = document.getElementById('istighfarCounter');
+    const progressFill = document.getElementById('progressFill');
+    const waitingMessage = document.getElementById('waitingMessage');
+    const statusText = document.getElementById('statusText');
+    const videoPreview = document.getElementById('videoPreview');
+    
+    let istighfarCount = 0;
+    let istighfarInterval = null;
+    
+    // تبديل الدقة
+    youtubeBtn.addEventListener('click', () => {
+        currentResolution = "youtube";
+        youtubeBtn.classList.add('active');
+        reelsBtn.classList.remove('active');
+    });
+    reelsBtn.addEventListener('click', () => {
+        currentResolution = "reels";
+        reelsBtn.classList.add('active');
+        youtubeBtn.classList.remove('active');
+    });
+    // تفعيل اليوتيوب افتراضياً
+    youtubeBtn.classList.add('active');
+    
     function getSelectedVerses() {
-        const from = parseInt(document.getElementById('fromVerse').value);
-        const to = parseInt(document.getElementById('toVerse').value);
+        const from = parseInt(fromVerseSelect.value);
+        const to = parseInt(toVerseSelect.value);
         const verses = [];
         for (let i = from; i <= to; i++) {
             if (versesData[i]) verses.push({ number: i, ...versesData[i] });
         }
         return verses;
     }
-
-    function showStatus(message, type) {
-        const statusDiv = document.getElementById('status');
-        statusDiv.textContent = message;
-        statusDiv.className = `status ${type}`;
-        statusDiv.style.display = "block";
+    
+    function startIstighfar() {
+        istighfarCount = 0;
+        if (istighfarInterval) clearInterval(istighfarInterval);
+        istighfarInterval = setInterval(() => {
+            istighfarCount++;
+            istighfarCounter.textContent = `أستغفر الله ${istighfarCount}`;
+        }, 800);
     }
-
-    document.getElementById('fontSize').addEventListener('input', (e) => {
-        document.getElementById('fontSizeValue').textContent = e.target.value;
-    });
-
-    // الوظيفة الرئيسية لإنشاء الفيديو
-    document.getElementById('generateBtn').onclick = async () => {
+    
+    function stopIstighfar() {
+        if (istighfarInterval) {
+            clearInterval(istighfarInterval);
+            istighfarInterval = null;
+        }
+    }
+    
+    function updateProgress(percent, message) {
+        progressFill.style.width = `${percent}%`;
+        if (message) statusText.textContent = message;
+    }
+    
+    function showWaiting(show, verseCount = 0) {
+        if (show) {
+            waitingArea.classList.remove('hidden');
+            startIstighfar();
+            if (verseCount > 5) {
+                waitingMessage.innerHTML = "⏳ عدد الآيات كبير، قد يستغرق الفيديو دقيقة إضافية ⏳<br>✋ استغفر الله العظيم وتوكل على الله";
+            } else {
+                waitingMessage.innerHTML = "🔄 جاري تحضير الفيديو... يرجى الانتظار 🤲";
+            }
+        } else {
+            waitingArea.classList.add('hidden');
+            stopIstighfar();
+            updateProgress(0, "");
+        }
+    }
+    
+    async function generateVideo() {
         const verses = getSelectedVerses();
         if (verses.length === 0) {
-            showStatus("الرجاء اختيار آيات صحيحة", "error");
+            statusText.textContent = "❌ الرجاء اختيار آيات صحيحة";
             return;
         }
-
-        const bgColor = document.getElementById('bgColor').value;
-        const textColor = document.getElementById('textColor').value;
-        const fontSize = parseInt(document.getElementById('fontSize').value);
         
-        showStatus("⏳ جاري تحميل تلاوة الشيخ علي جابر...", "loading");
-        const btn = document.getElementById('generateBtn');
-        btn.disabled = true;
-
+        generateBtn.disabled = true;
+        showWaiting(true, verses.length);
+        updateProgress(10, "⏳ جاري تحميل التلاوة...");
+        
         try {
-            // 1. تحميل الملف الصوتي
+            // تحميل الصوت
             const audioResponse = await fetch(audioUrl);
-            if (!audioResponse.ok) throw new Error("فشل تحميل الصوت، يرجى التحقق من الاتصال بالإنترنت");
+            if (!audioResponse.ok) throw new Error("فشل تحميل الصوت");
             const audioBlob = await audioResponse.blob();
             const audioLocalUrl = URL.createObjectURL(audioBlob);
             
-            showStatus("🎬 جاري إنشاء الفيديو بتوقيتات دقيقة...", "loading");
+            updateProgress(30, "🎨 جاري تجهيز الفيديو...");
             
-            // 2. إعداد Canvas للرسم
+            // تحديد أبعاد الفيديو حسب الدقة
+            let canvasWidth, canvasHeight;
+            if (currentResolution === "youtube") {
+                canvasWidth = 1280;
+                canvasHeight = 720;
+            } else {
+                canvasWidth = 720;
+                canvasHeight = 1280;
+            }
+            
+            // إعداد Canvas
             const canvas = document.createElement('canvas');
-            canvas.width = 1280;
-            canvas.height = 720;
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
             const ctx = canvas.getContext('2d');
             
-            // دالة رسم النص مع دعم الأسطر الطويلة (مثل الآية 7)
+            // خلفية سوداء ثابتة
+            const bgColor = "#000000";
+            const textColor = "#FFD700"; // ذهبي
+        
             function drawVerse(text) {
                 ctx.fillStyle = bgColor;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 if (!text) return;
                 
                 ctx.fillStyle = textColor;
-                ctx.font = `${fontSize}px 'Tajawal', 'Amiri', 'Arial', 'Segoe UI'`;
+                // خط عثماني أنيق
+                ctx.font = `500 ${Math.floor(canvasWidth / 22)}px 'Noto Naskh Arabic', 'Amiri Quran', 'Amiri', serif`;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 
-                // تقسيم النص لأسطر ذكية
-                const maxWidth = canvas.width - 100;
+                // تقسيم النص لأسطر
+                const maxWidth = canvas.width - 80;
                 const words = text.split(' ');
                 const lines = [];
                 let currentLine = "";
@@ -217,7 +482,7 @@
                 }
                 if (currentLine) lines.push(currentLine);
                 
-                const lineHeight = fontSize * 1.3;
+                const lineHeight = parseInt(ctx.font) * 1.4;
                 const totalHeight = lines.length * lineHeight;
                 let startY = (canvas.height - totalHeight) / 2;
                 
@@ -227,8 +492,17 @@
                 });
             }
             
-            // 3. إعداد تدفق الفيديو والصوت
+            // رسم أول آية للمعاينة
+            drawVerse(verses[0].text);
+            
+            // عرض المعاينة الحية
             const stream = canvas.captureStream(30);
+            videoPreview.srcObject = stream;
+            videoPreview.muted = false;
+            
+            updateProgress(50, "🎬 جاري تسجيل الفيديو مع المزامنة...");
+            
+            // إعداد التسجيل مع الصوت
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             const audioElement = new Audio(audioLocalUrl);
             const source = audioCtx.createMediaElementSource(audioElement);
@@ -237,10 +511,9 @@
             source.connect(audioCtx.destination);
             
             const combinedStream = new MediaStream();
-            stream.getVideoTracks().forEach(track => combinedStream.addTrack(track));
-            dest.stream.getAudioTracks().forEach(track => combinedStream.addTrack(track));
+            stream.getVideoTracks().forEach(t => combinedStream.addTrack(t));
+            dest.stream.getAudioTracks().forEach(t => combinedStream.addTrack(t));
             
-            // 4. بدء التسجيل
             const recorder = new MediaRecorder(combinedStream, { mimeType: 'video/webm' });
             const chunks = [];
             recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
@@ -249,14 +522,14 @@
             await audioCtx.resume();
             audioElement.play();
             
-            // 5. المزامنة بناءً على التوقيتات الدقيقة (start / end)
+            // المزامنة الدقيقة
             let currentVerseIndex = -1;
+            const totalDuration = verses[verses.length-1].end;
             
             const syncLoop = () => {
                 const currentTime = audioElement.currentTime;
                 let newIndex = -1;
                 
-                // البحث عن الآية التي ينتمي إليها الوقت الحالي
                 for (let i = 0; i < verses.length; i++) {
                     if (currentTime >= verses[i].start && currentTime <= verses[i].end) {
                         newIndex = i;
@@ -264,16 +537,18 @@
                     }
                 }
                 
-                // تغيير الآية إذا لزم الأمر
                 if (newIndex !== currentVerseIndex) {
                     currentVerseIndex = newIndex;
                     if (currentVerseIndex !== -1) {
                         drawVerse(verses[currentVerseIndex].text);
                     } else {
-                        // في الفواصل بين الآيات، تبقى الخلفية فقط بدون نص (أو يمكن وضع بسملة خفيفة)
                         drawVerse("");
                     }
                 }
+                
+                // تحديث نسبة التقدم
+                const percent = 50 + (currentTime / totalDuration) * 40;
+                updateProgress(Math.min(90, percent), `🎙️ جاري التسجيل... ${Math.floor(currentTime)}/${Math.floor(totalDuration)} ثانية`);
                 
                 if (!audioElement.ended) {
                     requestAnimationFrame(syncLoop);
@@ -282,8 +557,9 @@
             
             requestAnimationFrame(syncLoop);
             
-            // 6. انتظار انتهاء التلاوة ثم إنهاء التسجيل
             await new Promise(resolve => { audioElement.onended = resolve; });
+            
+            updateProgress(95, "📀 جاري إنهاء الفيديو...");
             
             setTimeout(() => {
                 if (recorder.state === 'recording') recorder.stop();
@@ -291,36 +567,37 @@
             
             await new Promise(resolve => { recorder.onstop = resolve; });
             
-            // 7. تحميل الفيديو النهائي
+            // تحميل الفيديو
             const finalBlob = new Blob(chunks, { type: 'video/webm' });
             const finalUrl = URL.createObjectURL(finalBlob);
             const a = document.createElement('a');
             a.href = finalUrl;
-            const fromVal = document.getElementById('fromVerse').value;
-            const toVal = document.getElementById('toVerse').value;
-            a.download = `الفاتحة_${fromVal}_الى_${toVal}_علي_جابر.webm`;
+            const fromVal = fromVerseSelect.value;
+            const toVal = toVerseSelect.value;
+            a.download = `الفاتحة_${fromVal}_الى_${toVal}_علي_جابر_${currentResolution}.webm`;
             a.click();
             
-            // تنظيف الروابط المؤقتة
             URL.revokeObjectURL(audioLocalUrl);
             URL.revokeObjectURL(finalUrl);
             audioCtx.close();
             
-            showStatus("✅ تم إنشاء الفيديو بنجاح! المزامنة دقيقة 100%", "success");
-            btn.disabled = false;
+            updateProgress(100, "✅ تم الإنشاء بنجاح!");
+            showWaiting(false);
+            generateBtn.disabled = false;
             
             setTimeout(() => {
-                if (document.getElementById('status').className === "status success") {
-                    document.getElementById('status').style.display = "none";
-                }
-            }, 4000);
+                videoPreview.srcObject = null;
+            }, 2000);
             
         } catch (error) {
             console.error(error);
-            showStatus("❌ خطأ: " + error.message, "error");
-            btn.disabled = false;
+            statusText.textContent = "❌ خطأ: " + error.message;
+            showWaiting(false);
+            generateBtn.disabled = false;
         }
-    };
+    }
+    
+    generateBtn.onclick = generateVideo;
 </script>
 </body>
 </html>
