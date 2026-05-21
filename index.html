@@ -13,236 +13,250 @@
         }
 
         body {
-            background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
-            font-family: 'Noto Naskh Arabic', 'Tajawal', system-ui, sans-serif;
-            padding: 24px;
+            background: linear-gradient(145deg, #f9fafc 0%, #f0f2f5 100%);
+            font-family: 'Noto Naskh Arabic', 'Tajawal', system-ui, -apple-system, sans-serif;
+            padding: 24px 20px;
             min-height: 100vh;
         }
 
-        /* تصميم أنيق وعصري */
+        /* الحاوية الرئيسية - تصميم أنيق فاتح */
         .container {
-            max-width: 1100px;
+            max-width: 800px;
+            width: 100%;
             margin: 0 auto;
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(12px);
-            border-radius: 48px;
-            padding: 28px;
-            border: 1px solid rgba(255, 215, 0, 0.15);
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 56px;
+            padding: 36px 32px;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s;
         }
 
         /* الهيدر */
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
         }
         .header h1 {
-            color: #ffd700;
-            font-size: 2.2rem;
-            display: flex;
+            background: linear-gradient(135deg, #2d6a4f, #1b4d3e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 2.1rem;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
         }
         .header p {
-            color: #9ca3af;
+            color: #5a6e7a;
             font-size: 0.85rem;
-            margin-top: 8px;
+            margin-top: 10px;
         }
-        .qari-name {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+        .qari-badge {
+            background: #eef2f5;
             display: inline-block;
-            padding: 6px 20px;
+            padding: 6px 22px;
             border-radius: 60px;
-            color: #86efac;
-            font-size: 0.8rem;
-            margin-top: 12px;
-            border: 1px solid #2d3a4e;
+            color: #2d6a4f;
+            font-size: 0.75rem;
+            margin-top: 14px;
+            font-weight: 500;
+            border: 1px solid #dce3e9;
         }
 
         /* أزرار اختيار الدقة */
         .resolution-section {
             display: flex;
-            gap: 20px;
+            gap: 18px;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
             flex-wrap: wrap;
         }
         .res-btn {
-            background: #1e293b;
-            border: 2px solid #334155;
-            padding: 14px 32px;
+            background: #ffffff;
+            border: 1.5px solid #dce3e9;
+            padding: 12px 28px;
             border-radius: 60px;
-            color: white;
-            font-weight: bold;
-            font-size: 1rem;
+            color: #2c3e4e;
+            font-weight: 600;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
         .res-btn.active {
-            background: #ffd700;
-            color: #0f172a;
-            border-color: #ffd700;
+            background: #2d6a4f;
+            border-color: #2d6a4f;
+            color: white;
+            box-shadow: 0 4px 10px rgba(45, 106, 79, 0.15);
         }
         .res-btn:hover {
-            transform: scale(1.02);
-            border-color: #ffd700;
+            transform: translateY(-2px);
+            border-color: #2d6a4f;
         }
 
-        /* اختيار الآيات */
+        /* بطاقة اختيار الآيات */
         .verses-card {
-            background: #0f172a;
-            border-radius: 32px;
-            padding: 22px;
-            margin-bottom: 25px;
+            background: #ffffff;
+            border-radius: 36px;
+            padding: 24px;
+            margin-bottom: 28px;
+            border: 1px solid #eef2f8;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
         .card-title {
-            color: #ffd700;
-            font-size: 1rem;
-            margin-bottom: 18px;
-            border-right: 3px solid #ffd700;
+            color: #2d6a4f;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border-right: 3px solid #2d6a4f;
             padding-right: 14px;
         }
         .verse-range {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
         }
         .verse-range select {
-            background: #1e293b;
-            border: none;
-            padding: 14px 24px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 14px 20px;
             border-radius: 60px;
-            color: white;
+            color: #1e2a3a;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
             flex: 1;
             min-width: 150px;
             text-align: center;
+            transition: all 0.2s;
+        }
+        .verse-range select:focus {
+            outline: none;
+            border-color: #2d6a4f;
         }
         .arrow-icon {
-            color: #ffd700;
-            font-size: 1.5rem;
+            color: #2d6a4f;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
-        /* معاينة الفيديو */
-        .preview-section {
-            background: #000000;
-            border-radius: 32px;
-            padding: 20px;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        .preview-label {
-            color: #9ca3af;
-            font-size: 0.75rem;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-        }
-        .preview-box {
-            background: #000;
-            border-radius: 24px;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 280px;
-            border: 1px solid #2d3a4e;
-        }
-        #videoPreview {
-            width: 100%;
-            max-width: 100%;
-            max-height: 500px;
-            background: black;
-        }
-
-        /* زر الإنشاء */
+        /* زر الإنشاء الرئيسي */
         .generate-btn {
             width: 100%;
-            background: linear-gradient(135deg, #ffd700, #f59e0b);
+            background: linear-gradient(135deg, #2d6a4f, #1b4d3e);
             border: none;
             padding: 18px;
             border-radius: 60px;
-            color: #0f172a;
+            color: white;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.2s;
-            margin: 15px 0;
+            margin: 16px 0 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
+            box-shadow: 0 6px 14px rgba(45, 106, 79, 0.25);
         }
         .generate-btn:hover {
-            transform: scale(1.01);
-            filter: brightness(1.05);
+            transform: translateY(-2px);
+            filter: brightness(1.03);
+            box-shadow: 0 10px 20px rgba(45, 106, 79, 0.3);
         }
         .generate-btn:disabled {
-            opacity: 0.6;
+            opacity: 0.65;
             cursor: not-allowed;
             transform: none;
         }
 
-        /* حالة الانتظار مع الاستغفار */
+        /* ========== منطقة الانتظار التفاعلية (أنيقة وخفيفة) ========== */
         .waiting-area {
-            background: #0f172a;
-            border-radius: 32px;
-            padding: 20px;
-            margin-top: 20px;
+            background: #ffffff;
+            border-radius: 44px;
+            padding: 32px 24px;
+            margin-top: 24px;
             text-align: center;
+            border: 1px solid #eef2f8;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
             transition: all 0.3s;
         }
         .waiting-area.hidden {
             display: none;
         }
+        .waiting-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #2d6a4f;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
         .istighfar-counter {
-            font-size: 1.2rem;
-            color: #86efac;
-            font-family: monospace;
-            letter-spacing: 2px;
-            margin: 10px 0;
+            background: #f1f5f9;
+            padding: 18px 16px;
+            border-radius: 80px;
+            font-size: 1.25rem;
+            color: #1e3a2f;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 16px 0;
+            font-family: 'Noto Naskh Arabic', monospace;
+            border: 1px solid #e2e8f0;
         }
         .progress-bar {
-            background: #1e293b;
+            background: #e9eef3;
             border-radius: 60px;
-            height: 6px;
-            margin: 15px 0;
+            height: 8px;
+            margin: 22px 0;
             overflow: hidden;
         }
         .progress-fill {
-            background: #ffd700;
+            background: linear-gradient(90deg, #2d6a4f, #40916c);
             width: 0%;
             height: 100%;
-            transition: width 0.3s ease;
+            transition: width 0.25s ease-out;
+            border-radius: 60px;
         }
         .waiting-message {
-            color: #9ca3af;
-            font-size: 0.75rem;
-            margin-top: 12px;
+            color: #5a6e7a;
+            font-size: 0.8rem;
+            margin: 18px 0 8px;
+            line-height: 1.6;
         }
         .status-text {
-            color: #ffd700;
+            color: #2d6a4f;
             font-size: 0.85rem;
-            margin-top: 10px;
+            font-weight: 500;
+            margin-top: 12px;
+        }
+        .note-small {
+            font-size: 0.7rem;
+            color: #8aa0ae;
+            margin-top: 16px;
         }
 
         footer {
             text-align: center;
-            margin-top: 25px;
-            color: #334155;
+            margin-top: 32px;
+            color: #8ba0ae;
             font-size: 0.7rem;
+            border-top: 1px solid #eef2f8;
+            padding-top: 22px;
         }
 
-        @media (max-width: 700px) {
-            .container { padding: 18px; }
-            .res-btn { padding: 10px 20px; font-size: 0.8rem; }
+        @media (max-width: 650px) {
+            .container { padding: 24px 18px; }
+            .res-btn { padding: 9px 18px; font-size: 0.8rem; }
+            .verse-range select { padding: 11px 14px; font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -251,8 +265,8 @@
 <div class="container">
     <div class="header">
         <h1>🕌 آيات 🎥</h1>
-        <p>تحويل تلاوة القرآن إلى فيديوهات احترافية</p>
-        <div class="qari-name">🎙️ الشيخ علي جابر رحمه الله - سورة الفاتحة</div>
+        <p>حوِّل تلاوة سورة الفاتحة إلى فيديو احترافي بمزامنة دقيقة</p>
+        <div class="qari-badge">🎙️ الشيخ علي جابر رحمه الله</div>
     </div>
 
     <!-- اختيار الدقة -->
@@ -267,31 +281,23 @@
 
     <!-- اختيار الآيات -->
     <div class="verses-card">
-        <div class="card-title">📖 اختيار الآيات</div>
+        <div class="card-title">📖 اختيار الآيات (من → إلى)</div>
         <div class="verse-range">
             <select id="fromVerse">
-                <option value="1">من الآية 1 (البسملة)</option>
-                <option value="2">من الآية 2 (الحمد لله)</option>
-                <option value="3">من الآية 3 (الرحمن الرحيم)</option>
-                <option value="4">من الآية 4 (مالك يوم الدين)</option>
-                <option value="5">من الآية 5 (إياك نعبد)</option>
-                <option value="6">من الآية 6 (اهدنا الصراط)</option>
-                <option value="7">من الآية 7 (صراط الذين)</option>
+                <option value="1">١ - البسملة</option>
+                <option value="2">٢ - الحمد لله</option>
+                <option value="3">٣ - الرحمن الرحيم</option>
+                <option value="4">٤ - مالك يوم الدين</option>
+                <option value="5">٥ - إياك نعبد</option>
+                <option value="6">٦ - اهدنا الصراط</option>
+                <option value="7">٧ - صراط الذين</option>
             </select>
             <span class="arrow-icon">←</span>
             <select id="toVerse">
-                <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-                <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-                <option value="7" selected>7</option>
+                <option value="1">١</option><option value="2">٢</option><option value="3">٣</option>
+                <option value="4">٤</option><option value="5">٥</option><option value="6">٦</option>
+                <option value="7" selected>٧</option>
             </select>
-        </div>
-    </div>
-
-    <!-- معاينة الفيديو -->
-    <div class="preview-section">
-        <div class="preview-label">📺 معاينة حية (أثناء الإنشاء)</div>
-        <div class="preview-box">
-            <video id="videoPreview" autoplay muted playsinline></video>
         </div>
     </div>
 
@@ -300,27 +306,29 @@
         🎬 إنشاء الفيديو وتحميله
     </button>
 
-    <!-- منطقة الانتظار مع الاستغفار -->
+    <!-- منطقة الانتظار التفاعلية (تظهر فقط أثناء التجهيز) -->
     <div id="waitingArea" class="waiting-area hidden">
-        <div style="color:#ffd700;">⏳ جاري إنشاء الفيديو...</div>
-        <div class="istighfar-counter" id="istighfarCounter">أستغفر الله 0</div>
+        <div class="waiting-title">
+            <span>⏳</span> جاري تحضير الفيديو <span>✨</span>
+        </div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
+        <div class="istighfar-counter" id="istighfarCounter">أستغفر الله ٠</div>
         <div class="waiting-message" id="waitingMessage">
-            🔄 إذا كانت الآيات كثيرة قد يستغرق الفيديو بعض الوقت
+            🤲 املأ وقت الانتظار بالاستغفار والصلاة على النبي 🤲
         </div>
         <div class="status-text" id="statusText"></div>
+        <div class="note-small" id="extraNote"></div>
     </div>
 
     <footer>
-        ✅ المزامنة دقيقة مع تلاوة الشيخ علي جابر | خلفية سوداء | خط عثماني
+        ✅ مزامنة دقيقة مع تلاوة الشيخ علي جابر | خلفية سوداء | خط عثماني
     </footer>
 </div>
 
 <script>
-    // ==================== بيانات سورة الفاتحة من توقيتات علي جابر ====================
-    // تم إضافة البسملة (الآية 1) بشكل صحيح
+    // ------------------- بيانات سورة الفاتحة بتوقيتات دقيقة -------------------
     const versesData = {
         1: { text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", start: 5.884, end: 13.407 },
         2: { text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", start: 13.407, end: 21.520 },
@@ -333,21 +341,20 @@
 
     const audioUrl = "https://download.quranicaudio.com/quran/ali_jaber//001.mp3";
     
-    // الدقة المختارة
-    let currentResolution = "youtube"; // youtube = 1280x720, reels = 720x1280
+    let currentResolution = "youtube";
     
-    // عناصر DOM
+    // عناصر dom
     const youtubeBtn = document.getElementById('youtubeBtn');
     const reelsBtn = document.getElementById('reelsBtn');
-    const fromVerseSelect = document.getElementById('fromVerse');
-    const toVerseSelect = document.getElementById('toVerse');
+    const fromSelect = document.getElementById('fromVerse');
+    const toSelect = document.getElementById('toVerse');
     const generateBtn = document.getElementById('generateBtn');
     const waitingArea = document.getElementById('waitingArea');
-    const istighfarCounter = document.getElementById('istighfarCounter');
     const progressFill = document.getElementById('progressFill');
+    const istighfarCounter = document.getElementById('istighfarCounter');
     const waitingMessage = document.getElementById('waitingMessage');
     const statusText = document.getElementById('statusText');
-    const videoPreview = document.getElementById('videoPreview');
+    const extraNote = document.getElementById('extraNote');
     
     let istighfarCount = 0;
     let istighfarInterval = null;
@@ -363,12 +370,11 @@
         reelsBtn.classList.add('active');
         youtubeBtn.classList.remove('active');
     });
-    // تفعيل اليوتيوب افتراضياً
     youtubeBtn.classList.add('active');
     
     function getSelectedVerses() {
-        const from = parseInt(fromVerseSelect.value);
-        const to = parseInt(toVerseSelect.value);
+        const from = parseInt(fromSelect.value);
+        const to = parseInt(toSelect.value);
         const verses = [];
         for (let i = from; i <= to; i++) {
             if (versesData[i]) verses.push({ number: i, ...versesData[i] });
@@ -382,35 +388,16 @@
         istighfarInterval = setInterval(() => {
             istighfarCount++;
             istighfarCounter.textContent = `أستغفر الله ${istighfarCount}`;
-        }, 800);
+        }, 700);
     }
     
     function stopIstighfar() {
-        if (istighfarInterval) {
-            clearInterval(istighfarInterval);
-            istighfarInterval = null;
-        }
+        if (istighfarInterval) { clearInterval(istighfarInterval); istighfarInterval = null; }
     }
     
     function updateProgress(percent, message) {
-        progressFill.style.width = `${percent}%`;
+        progressFill.style.width = `${Math.min(100, percent)}%`;
         if (message) statusText.textContent = message;
-    }
-    
-    function showWaiting(show, verseCount = 0) {
-        if (show) {
-            waitingArea.classList.remove('hidden');
-            startIstighfar();
-            if (verseCount > 5) {
-                waitingMessage.innerHTML = "⏳ عدد الآيات كبير، قد يستغرق الفيديو دقيقة إضافية ⏳<br>✋ استغفر الله العظيم وتوكل على الله";
-            } else {
-                waitingMessage.innerHTML = "🔄 جاري تحضير الفيديو... يرجى الانتظار 🤲";
-            }
-        } else {
-            waitingArea.classList.add('hidden');
-            stopIstighfar();
-            updateProgress(0, "");
-        }
     }
     
     async function generateVideo() {
@@ -420,9 +407,17 @@
             return;
         }
         
+        // إظهار رسالة إضافية إذا تجاوز عدد الآيات 20 (هنا 7 فقط لكن للتوضيح)
+        if (verses.length > 20) {
+            extraNote.innerHTML = "📌 عدد الآيات كبير (أكثر من 20) قد يستغرق الفيديو دقيقة إضافية، نرجو الصبر";
+        } else {
+            extraNote.innerHTML = "";
+        }
+        
         generateBtn.disabled = true;
-        showWaiting(true, verses.length);
-        updateProgress(10, "⏳ جاري تحميل التلاوة...");
+        waitingArea.classList.remove('hidden');
+        startIstighfar();
+        updateProgress(5, "⏳ جاري تحميل التلاوة...");
         
         try {
             // تحميل الصوت
@@ -431,81 +426,59 @@
             const audioBlob = await audioResponse.blob();
             const audioLocalUrl = URL.createObjectURL(audioBlob);
             
-            updateProgress(30, "🎨 جاري تجهيز الفيديو...");
+            updateProgress(25, "🎨 تجهيز الفيديو...");
             
-            // تحديد أبعاد الفيديو حسب الدقة
+            // تحديد أبعاد الفيديو
             let canvasWidth, canvasHeight;
             if (currentResolution === "youtube") {
-                canvasWidth = 1280;
-                canvasHeight = 720;
+                canvasWidth = 1280; canvasHeight = 720;
             } else {
-                canvasWidth = 720;
-                canvasHeight = 1280;
+                canvasWidth = 720; canvasHeight = 1280;
             }
             
-            // إعداد Canvas
             const canvas = document.createElement('canvas');
             canvas.width = canvasWidth;
             canvas.height = canvasHeight;
             const ctx = canvas.getContext('2d');
             
-            // خلفية سوداء ثابتة
+            // خلفية سوداء وذهبي
             const bgColor = "#000000";
-            const textColor = "#FFD700"; // ذهبي
-        
+            const textColor = "#FFD700";
+            
             function drawVerse(text) {
                 ctx.fillStyle = bgColor;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 if (!text) return;
-                
                 ctx.fillStyle = textColor;
-                // خط عثماني أنيق
-                ctx.font = `500 ${Math.floor(canvasWidth / 22)}px 'Noto Naskh Arabic', 'Amiri Quran', 'Amiri', serif`;
+                ctx.font = `500 ${Math.floor(canvasWidth / 22)}px 'Noto Naskh Arabic', 'Amiri Quran', serif`;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 
-                // تقسيم النص لأسطر
                 const maxWidth = canvas.width - 80;
                 const words = text.split(' ');
-                const lines = [];
-                let currentLine = "";
-                
+                const lines = []; let currentLine = "";
                 for (const word of words) {
                     const testLine = currentLine + (currentLine ? " " : "") + word;
-                    const metrics = ctx.measureText(testLine);
-                    if (metrics.width > maxWidth && currentLine.length > 0) {
+                    if (ctx.measureText(testLine).width > maxWidth && currentLine.length > 0) {
                         lines.push(currentLine);
                         currentLine = word;
-                    } else {
-                        currentLine = testLine;
-                    }
+                    } else { currentLine = testLine; }
                 }
                 if (currentLine) lines.push(currentLine);
-                
                 const lineHeight = parseInt(ctx.font) * 1.4;
-                const totalHeight = lines.length * lineHeight;
-                let startY = (canvas.height - totalHeight) / 2;
-                
-                lines.forEach(line => {
-                    ctx.fillText(line, canvas.width / 2, startY);
-                    startY += lineHeight;
+                const startY = (canvas.height - (lines.length * lineHeight)) / 2;
+                lines.forEach((line, idx) => {
+                    ctx.fillText(line, canvas.width/2, startY + idx * lineHeight);
                 });
             }
             
-            // رسم أول آية للمعاينة
             drawVerse(verses[0].text);
-            
-            // عرض المعاينة الحية
             const stream = canvas.captureStream(30);
-            videoPreview.srcObject = stream;
-            videoPreview.muted = false;
             
-            updateProgress(50, "🎬 جاري تسجيل الفيديو مع المزامنة...");
-            
-            // إعداد التسجيل مع الصوت
+            // إعداد الصوت
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const audioElement = new Audio(audioLocalUrl);
-            const source = audioCtx.createMediaElementSource(audioElement);
+            const audioElem = new Audio(audioLocalUrl);
+            const source = audioCtx.createMediaElementSource(audioElem);
             const dest = audioCtx.createMediaStreamDestination();
             source.connect(dest);
             source.connect(audioCtx.destination);
@@ -516,83 +489,60 @@
             
             const recorder = new MediaRecorder(combinedStream, { mimeType: 'video/webm' });
             const chunks = [];
-            recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+            recorder.ondataavailable = e => { if(e.data.size > 0) chunks.push(e.data); };
             
             recorder.start();
             await audioCtx.resume();
-            audioElement.play();
+            audioElem.play();
             
-            // المزامنة الدقيقة
-            let currentVerseIndex = -1;
+            let currentVerse = -1;
             const totalDuration = verses[verses.length-1].end;
             
             const syncLoop = () => {
-                const currentTime = audioElement.currentTime;
-                let newIndex = -1;
-                
-                for (let i = 0; i < verses.length; i++) {
-                    if (currentTime >= verses[i].start && currentTime <= verses[i].end) {
-                        newIndex = i;
-                        break;
-                    }
+                const ct = audioElem.currentTime;
+                let newIdx = -1;
+                for(let i=0; i<verses.length; i++) {
+                    if(ct >= verses[i].start && ct <= verses[i].end) { newIdx = i; break; }
                 }
-                
-                if (newIndex !== currentVerseIndex) {
-                    currentVerseIndex = newIndex;
-                    if (currentVerseIndex !== -1) {
-                        drawVerse(verses[currentVerseIndex].text);
-                    } else {
-                        drawVerse("");
-                    }
+                if(newIdx !== currentVerse) {
+                    currentVerse = newIdx;
+                    drawVerse(currentVerse !== -1 ? verses[currentVerse].text : "");
                 }
-                
-                // تحديث نسبة التقدم
-                const percent = 50 + (currentTime / totalDuration) * 40;
-                updateProgress(Math.min(90, percent), `🎙️ جاري التسجيل... ${Math.floor(currentTime)}/${Math.floor(totalDuration)} ثانية`);
-                
-                if (!audioElement.ended) {
-                    requestAnimationFrame(syncLoop);
-                }
+                const percent = 25 + (ct / totalDuration) * 70;
+                updateProgress(percent, `🎙️ تسجيل الآيات... ${Math.floor(ct)}/${Math.floor(totalDuration)} ث`);
+                if(!audioElem.ended) requestAnimationFrame(syncLoop);
             };
-            
             requestAnimationFrame(syncLoop);
             
-            await new Promise(resolve => { audioElement.onended = resolve; });
-            
-            updateProgress(95, "📀 جاري إنهاء الفيديو...");
-            
-            setTimeout(() => {
-                if (recorder.state === 'recording') recorder.stop();
-            }, 200);
-            
+            await new Promise(resolve => { audioElem.onended = resolve; });
+            updateProgress(96, "📀 تجهيز الملف النهائي...");
+            setTimeout(() => { if(recorder.state === 'recording') recorder.stop(); }, 200);
             await new Promise(resolve => { recorder.onstop = resolve; });
             
-            // تحميل الفيديو
             const finalBlob = new Blob(chunks, { type: 'video/webm' });
-            const finalUrl = URL.createObjectURL(finalBlob);
+            const url = URL.createObjectURL(finalBlob);
             const a = document.createElement('a');
-            a.href = finalUrl;
-            const fromVal = fromVerseSelect.value;
-            const toVal = toVerseSelect.value;
-            a.download = `الفاتحة_${fromVal}_الى_${toVal}_علي_جابر_${currentResolution}.webm`;
+            a.href = url;
+            a.download = `الفاتحة_${fromSelect.value}_الى_${toSelect.value}_${currentResolution}.webm`;
             a.click();
             
             URL.revokeObjectURL(audioLocalUrl);
-            URL.revokeObjectURL(finalUrl);
+            URL.revokeObjectURL(url);
             audioCtx.close();
             
-            updateProgress(100, "✅ تم الإنشاء بنجاح!");
-            showWaiting(false);
-            generateBtn.disabled = false;
-            
+            updateProgress(100, "✅ تم التحميل بنجاح!");
+            stopIstighfar();
             setTimeout(() => {
-                videoPreview.srcObject = null;
-            }, 2000);
+                waitingArea.classList.add('hidden');
+                generateBtn.disabled = false;
+                updateProgress(0, "");
+                istighfarCounter.textContent = "أستغفر الله ٠";
+            }, 1800);
             
-        } catch (error) {
-            console.error(error);
-            statusText.textContent = "❌ خطأ: " + error.message;
-            showWaiting(false);
+        } catch(err) {
+            console.error(err);
+            statusText.textContent = "❌ حدث خطأ: " + err.message;
+            stopIstighfar();
             generateBtn.disabled = false;
         }
     }
