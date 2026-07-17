@@ -28,7 +28,6 @@
             box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.12);
         }
 
-        /* الهيدر */
         .logo {
             text-align: center;
             margin-bottom: 30px;
@@ -56,7 +55,6 @@
             font-weight: 500;
         }
 
-        /* بطاقة اختيار الآيات */
         .selection-card {
             background: #f8fafc;
             border-radius: 32px;
@@ -97,7 +95,6 @@
             font-size: 1.3rem;
         }
 
-        /* زر الإنشاء */
         .generate-btn {
             width: 100%;
             background: #2d6a4f;
@@ -125,7 +122,6 @@
             transform: none;
         }
 
-        /* منطقة الانتظار */
         .progress-area {
             background: #f8fafc;
             border-radius: 36px;
@@ -238,7 +234,7 @@
             <div class="progress-fill" id="progressFill"></div>
         </div>
         <div class="istighfar" id="istighfarText">أستغفر الله ٠</div>
-        <div class="wait-message" id="waitMessage">🤲 املأ وقت الانتظار بالاستغفار والصلاة على النبي 🤲</div>
+        <div class="wait-message">🤲 املأ وقت الانتظار بالاستغفار والصلاة على النبي 🤲</div>
         <div class="extra-notice" id="extraNotice"></div>
         <div class="status-msg" id="statusMsg"></div>
     </div>
@@ -249,7 +245,7 @@
 </div>
 
 <script>
-    // بيانات الآيات مع التوقيتات الدقيقة
+    // ==================== بيانات السورة ====================
     const versesData = {
         1: { text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", start: 5.884, end: 13.407 },
         2: { text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", start: 13.407, end: 21.520 },
@@ -321,9 +317,10 @@
         generateBtn.disabled = true;
         progressArea.classList.add('show');
         startIstighfar();
-        updateProgress(5, "جاري تحميل التلاوة...");
+        updateProgress(10, "جاري تحميل التلاوة...");
 
         try {
+            // === 1. تحميل الصوت بشكل تدريجي (بدون انتظار التحميل الكامل) ===
             const audioResponse = await fetch(audioUrl);
             if (!audioResponse.ok) throw new Error("فشل تحميل الصوت");
             const audioBlob = await audioResponse.blob();
@@ -331,23 +328,25 @@
 
             updateProgress(20, "تجهيز الفيديو...");
 
-            // أبعاد يوتيوب ثابتة
+            // === 2. إعداد Canvas ===
             const canvas = document.createElement('canvas');
             canvas.width = 1280;
             canvas.height = 720;
             const ctx = canvas.getContext('2d');
 
+            // === 3. دالة الرسم (مع ضبط الوسيط) ===
             function drawVerse(text) {
                 ctx.fillStyle = "#000000";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 if (!text) return;
 
                 ctx.fillStyle = "#FFD700";
-                ctx.font = `500 ${Math.floor(canvas.width / 22)}px 'Noto Naskh Arabic', 'Amiri Quran', serif`;
+                const fontSize = Math.floor(canvas.width / 20); // حجم خط مناسب
+                ctx.font = `500 ${fontSize}px 'Noto Naskh Arabic', 'Amiri Quran', serif`;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
 
-                const maxWidth = canvas.width - 80;
+                const maxWidth = canvas.width - 100;
                 const words = text.split(' ');
                 const lines = [];
                 let currentLine = "";
@@ -363,14 +362,20 @@
                 }
                 if (currentLine) lines.push(currentLine);
 
-                const lineHeight = parseInt(ctx.font) * 1.4;
-                const startY = (canvas.height - (lines.length * lineHeight)) / 2;
+                const lineHeight = fontSize * 1.4;
+                const totalHeight = lines.length * lineHeight;
+                // 🔥 التصحيح: حساب startY بحيث يكون النص في المنتصف تماماً
+                const startY = (canvas.height - totalHeight) / 2;
+
                 lines.forEach((line, idx) => {
                     ctx.fillText(line, canvas.width / 2, startY + idx * lineHeight);
                 });
             }
 
+            // رسم أول آية فوراً
             drawVerse(verses[0].text);
+
+            // === 4. إعداد التدفق الصوتي والمرئي ===
             const stream = canvas.captureStream(30);
 
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -384,41 +389,72 @@
             stream.getVideoTracks().forEach(t => combinedStream.addTrack(t));
             dest.stream.getAudioTracks().forEach(t => combinedStream.addTrack(t));
 
+            // === 5. بدء التسجيل فوراً (لا ننتظر تحميل الصوت بالكامل) ===
             const recorder = new MediaRecorder(combinedStream, { mimeType: 'video/webm' });
             const chunks = [];
             recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
 
             recorder.start();
             await audioCtx.resume();
-            audioElem.play();
 
+            // تشغيل الصوت مع بدء التسجيل (لا ننتظر تحميله بالكامل)
+            audioElem.play().catch(e => console.warn("تشغيل الصوت:", e));
+
+            updateProgress(30, "جاري التسجيل...");
+
+            // === 6. حلقة المزامنة ===
             let currentVerse = -1;
             const totalDuration = verses[verses.length - 1].end;
+            let startTime = performance.now();
 
             const syncLoop = () => {
-                const currentTime = audioElem.currentTime;
+                const currentTime = audioElem.currentTime || (performance.now() - startTime) / 1000;
                 let newIndex = -1;
+
                 for (let i = 0; i < verses.length; i++) {
                     if (currentTime >= verses[i].start && currentTime <= verses[i].end) {
                         newIndex = i;
                         break;
                     }
                 }
+
                 if (newIndex !== currentVerse) {
                     currentVerse = newIndex;
                     drawVerse(currentVerse !== -1 ? verses[currentVerse].text : "");
                 }
-                const percent = 20 + (currentTime / totalDuration) * 75;
+
+                const percent = 20 + (Math.min(currentTime, totalDuration) / totalDuration) * 75;
                 updateProgress(percent, `جاري التسجيل... ${Math.floor(currentTime)}/${Math.floor(totalDuration)} ثانية`);
-                if (!audioElem.ended) requestAnimationFrame(syncLoop);
+
+                if (!audioElem.ended && !audioElem.paused) {
+                    requestAnimationFrame(syncLoop);
+                } else if (audioElem.ended) {
+                    // انتهى الصوت، ننهي التسجيل
+                    updateProgress(96, "تجهيز الملف النهائي...");
+                    setTimeout(() => {
+                        if (recorder.state === 'recording') recorder.stop();
+                    }, 200);
+                } else {
+                    // في حالة التوقف المفاجئ
+                    requestAnimationFrame(syncLoop);
+                }
             };
+
+            // بدء حلقة المزامنة
             requestAnimationFrame(syncLoop);
 
-            await new Promise(resolve => { audioElem.onended = resolve; });
-            updateProgress(96, "تجهيز الملف النهائي...");
-            setTimeout(() => { if (recorder.state === 'recording') recorder.stop(); }, 200);
+            // في حال انتهى الصوت
+            audioElem.onended = () => {
+                updateProgress(96, "تجهيز الملف النهائي...");
+                setTimeout(() => {
+                    if (recorder.state === 'recording') recorder.stop();
+                }, 200);
+            };
+
+            // انتظار انتهاء التسجيل
             await new Promise(resolve => { recorder.onstop = resolve; });
 
+            // === 7. تحميل الفيديو النهائي ===
             const finalBlob = new Blob(chunks, { type: 'video/webm' });
             const url = URL.createObjectURL(finalBlob);
             const a = document.createElement('a');
@@ -432,6 +468,7 @@
 
             updateProgress(100, "تم التحميل بنجاح!");
             stopIstighfar();
+
             setTimeout(() => {
                 progressArea.classList.remove('show');
                 generateBtn.disabled = false;
@@ -441,7 +478,7 @@
             }, 2000);
 
         } catch (error) {
-            console.error(error);
+            console.error("خطأ:", error);
             statusMsg.textContent = "حدث خطأ، حاول مرة أخرى";
             stopIstighfar();
             generateBtn.disabled = false;
