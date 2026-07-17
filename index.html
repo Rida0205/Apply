@@ -30,6 +30,7 @@
             border-radius: 48px;
             padding: 40px 35px;
             box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.12);
+            transition: all 0.3s ease;
         }
 
         .logo {
@@ -183,6 +184,11 @@
             margin-top: 12px;
             font-weight: 500;
         }
+        .loading-speed {
+            color: #6c7a8a;
+            font-size: 0.7rem;
+            margin-top: 5px;
+        }
 
         footer {
             text-align: center;
@@ -234,6 +240,7 @@
 
     <div class="progress-area" id="progressArea">
         <div class="loading-title">⏳ جاري إنشاء الفيديو</div>
+        <div class="loading-speed" id="loadingSpeed">⏱️ جاري تحميل الصوت...</div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
@@ -270,6 +277,7 @@
     const istighfarText = document.getElementById('istighfarText');
     const statusMsg = document.getElementById('statusMsg');
     const extraNotice = document.getElementById('extraNotice');
+    const loadingSpeed = document.getElementById('loadingSpeed');
 
     let istighfarCount = 0;
     let istighfarInterval = null;
@@ -322,28 +330,16 @@
         progressArea.classList.add('show');
         startIstighfar();
         updateProgress(5, "جاري تحميل التلاوة...");
+        loadingSpeed.textContent = "⏱️ جاري تحميل الصوت...";
 
         try {
-            // === 1. تحميل الصوت ===
-            const audioResponse = await fetch(audioUrl);
-            if (!audioResponse.ok) throw new Error("فشل تحميل الصوت");
-            
-            // تحويل الصوت إلى ArrayBuffer مباشرة
-            const audioArrayBuffer = await audioResponse.arrayBuffer();
-            
-            // فك تشفير الصوت باستخدام AudioContext
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const audioBuffer = await audioCtx.decodeAudioData(audioArrayBuffer);
-
-            updateProgress(20, "تجهيز الفيديو...");
-
-            // === 2. إعداد Canvas ===
+            // === 1. إعداد Canvas فوراً (بدون انتظار الصوت) ===
             const canvas = document.createElement('canvas');
             canvas.width = 1280;
             canvas.height = 720;
             const ctx = canvas.getContext('2d');
 
-            // === 3. دالة الرسم مع ضبط المنتصف تماماً ===
+            // دالة الرسم
             function drawVerse(text) {
                 ctx.fillStyle = "#000000";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -380,22 +376,36 @@
                 });
             }
 
-            // رسم أول آية
+            // رسم أول آية فوراً
             drawVerse(verses[0].text);
 
-            // === 4. إنشاء تدفق الفيديو من Canvas ===
+            // === 2. إنشاء تدفق الفيديو من Canvas ===
             const canvasStream = canvas.captureStream(30);
+
+            // === 3. إعداد AudioContext ===
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             
-            // === 5. إنشاء تدفق الصوت من AudioBuffer ===
-            // ننشئ مصدر صوتي من الـ AudioBuffer
+            // === 4. تحميل الصوت بشكل متدفق (Streaming) ===
+            const audioResponse = await fetch(audioUrl);
+            if (!audioResponse.ok) throw new Error("فشل تحميل الصوت");
+            
+            // قراءة الصوت كـ ArrayBuffer
+            const audioArrayBuffer = await audioResponse.arrayBuffer();
+            
+            // فك تشفير الصوت
+            const audioBuffer = await audioCtx.decodeAudioData(audioArrayBuffer);
+            
+            loadingSpeed.textContent = "✅ تم تحميل الصوت، بدء التسجيل...";
+            updateProgress(20, "بدء التسجيل...");
+
+            // === 5. إنشاء مصدر صوتي ===
             const source = audioCtx.createBufferSource();
             source.buffer = audioBuffer;
             
-            // نربطه بـ MediaStreamDestination لتسجيل الصوت
+            // إنشاء وجهة للتيار الصوتي
             const destination = audioCtx.createMediaStreamDestination();
             source.connect(destination);
-            
-            // نربط أيضاً بمخرجات السماعات حتى يسمع المستخدم الصوت (اختياري)
+            // نربط أيضاً بالسماعات حتى يسمع المستخدم
             source.connect(audioCtx.destination);
 
             // === 6. دمج التدفقات ===
@@ -404,7 +414,7 @@
             destination.stream.getAudioTracks().forEach(track => combinedStream.addTrack(track));
 
             // === 7. بدء التسجيل ===
-            const recorder = new MediaRecorder(combinedStream, { 
+            let recorder = new MediaRecorder(combinedStream, { 
                 mimeType: 'video/webm;codecs=vp9,opus' 
             });
             
@@ -418,13 +428,13 @@
             const chunks = [];
             recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
 
-            // بدء التسجيل
+            // بدء التسجيل فوراً
             recorder.start();
             
-            // تشغيل الصوت
+            // بدء تشغيل الصوت
             source.start();
             
-            updateProgress(30, "جاري التسجيل...");
+            updateProgress(25, "جاري التسجيل...");
 
             // === 8. حلقة المزامنة ===
             let currentVerse = -1;
@@ -448,7 +458,7 @@
                     drawVerse(currentVerse !== -1 ? verses[currentVerse].text : "");
                 }
                 
-                const percent = 30 + (currentTime / totalDuration) * 65;
+                const percent = 25 + (currentTime / totalDuration) * 70;
                 updateProgress(percent, `جاري التسجيل... ${Math.floor(currentTime)}/${Math.floor(totalDuration)} ثانية`);
                 
                 if (currentTime < totalDuration) {
@@ -484,6 +494,7 @@
             await audioCtx.close();
 
             updateProgress(100, "تم التحميل بنجاح!");
+            loadingSpeed.textContent = "✅ تم الإنشاء بنجاح!";
             stopIstighfar();
 
             setTimeout(() => {
@@ -492,11 +503,13 @@
                 progressFill.style.width = "0%";
                 istighfarText.textContent = "أستغفر الله ٠";
                 statusMsg.textContent = "";
+                loadingSpeed.textContent = "";
             }, 2000);
 
         } catch (error) {
             console.error("خطأ:", error);
             statusMsg.textContent = "حدث خطأ: " + error.message;
+            loadingSpeed.textContent = "❌ فشل التحميل";
             stopIstighfar();
             generateBtn.disabled = false;
         }
