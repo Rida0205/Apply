@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آيات - فيديوهات القرآن | الشيخ علي جابر</title>
+    <title>آيات - إنشاء فيديو احترافي</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -17,10 +17,14 @@
             font-family: 'Noto Naskh Arabic', 'Tajawal', system-ui, sans-serif;
             padding: 20px;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .container {
             max-width: 750px;
+            width: 100%;
             margin: 0 auto;
             background: #ffffff;
             border-radius: 48px;
@@ -188,6 +192,11 @@
             padding-top: 20px;
             border-top: 1px solid #eef2f8;
         }
+        .loading-ffmpeg {
+            color: #d97706;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -213,12 +222,8 @@
             </select>
             <span class="arrow-icon">←</span>
             <select id="toVerse">
-                <option value="1">١</option>
-                <option value="2">٢</option>
-                <option value="3">٣</option>
-                <option value="4">٤</option>
-                <option value="5">٥</option>
-                <option value="6">٦</option>
+                <option value="1">١</option><option value="2">٢</option><option value="3">٣</option>
+                <option value="4">٤</option><option value="5">٥</option><option value="6">٦</option>
                 <option value="7" selected>٧</option>
             </select>
         </div>
@@ -230,6 +235,7 @@
 
     <div class="progress-area" id="progressArea">
         <div class="loading-title">⏳ جاري إنشاء الفيديو</div>
+        <div class="loading-ffmpeg" id="ffmpegLoading">📦 جاري تحميل محرك الفيديو (مرة واحدة فقط)...</div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
@@ -244,8 +250,10 @@
     </footer>
 </div>
 
+<!-- تحميل مكتبة FFmpeg.wasm -->
+<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.6/dist/umd/ffmpeg.js"></script>
 <script>
-    // ==================== بيانات السورة ====================
+    // ==================== البيانات ====================
     const versesData = {
         1: { text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", start: 5.884, end: 13.407 },
         2: { text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", start: 13.407, end: 21.520 },
@@ -258,6 +266,7 @@
 
     const audioUrl = "https://download.quranicaudio.com/quran/ali_jaber//001.mp3";
 
+    // ==================== عناصر DOM ====================
     const fromSelect = document.getElementById('fromVerse');
     const toSelect = document.getElementById('toVerse');
     const generateBtn = document.getElementById('generateBtn');
@@ -266,10 +275,12 @@
     const istighfarText = document.getElementById('istighfarText');
     const statusMsg = document.getElementById('statusMsg');
     const extraNotice = document.getElementById('extraNotice');
+    const ffmpegLoading = document.getElementById('ffmpegLoading');
 
     let istighfarCount = 0;
     let istighfarInterval = null;
 
+    // ==================== دوال مساعدة ====================
     function getSelectedVerses() {
         const from = parseInt(fromSelect.value);
         const to = parseInt(toSelect.value);
@@ -301,6 +312,30 @@
         if (message) statusMsg.textContent = message;
     }
 
+    // ==================== تحميل FFmpeg ====================
+    let ffmpeg = null;
+    let isFFmpegLoaded = false;
+
+    async function loadFFmpeg() {
+        if (isFFmpegLoaded) return true;
+        ffmpegLoading.style.display = 'block';
+        try {
+            ffmpeg = new FFmpeg();
+            ffmpeg.on('log', ({ message }) => console.log(message));
+            await ffmpeg.load();
+            isFFmpegLoaded = true;
+            ffmpegLoading.textContent = '✅ محرك الفيديو جاهز!';
+            ffmpegLoading.style.color = '#2d6a4f';
+            return true;
+        } catch (err) {
+            console.error(err);
+            ffmpegLoading.textContent = '❌ فشل تحميل محرك الفيديو';
+            ffmpegLoading.style.color = '#dc2626';
+            return false;
+        }
+    }
+
+    // ==================== الوظيفة الرئيسية ====================
     async function generateVideo() {
         const verses = getSelectedVerses();
         if (verses.length === 0) {
@@ -317,154 +352,74 @@
         generateBtn.disabled = true;
         progressArea.classList.add('show');
         startIstighfar();
+        updateProgress(5, "جاري تحميل محرك الفيديو...");
+
+        // تحميل FFmpeg
+        const loaded = await loadFFmpeg();
+        if (!loaded) {
+            statusMsg.textContent = "فشل تحميل محرك الفيديو، تأكد من اتصال الإنترنت";
+            generateBtn.disabled = false;
+            stopIstighfar();
+            return;
+        }
+
         updateProgress(10, "جاري تحميل التلاوة...");
 
         try {
-            // === 1. تحميل الصوت بشكل تدريجي (بدون انتظار التحميل الكامل) ===
+            // === 1. تحميل الصوت ===
             const audioResponse = await fetch(audioUrl);
             if (!audioResponse.ok) throw new Error("فشل تحميل الصوت");
-            const audioBlob = await audioResponse.blob();
-            const audioLocalUrl = URL.createObjectURL(audioBlob);
+            const audioBuffer = await audioResponse.arrayBuffer();
+            await ffmpeg.writeFile('input.mp3', new Uint8Array(audioBuffer));
 
-            updateProgress(20, "تجهيز الفيديو...");
+            updateProgress(20, "تجهيز الآيات...");
 
-            // === 2. إعداد Canvas ===
-            const canvas = document.createElement('canvas');
-            canvas.width = 1280;
-            canvas.height = 720;
-            const ctx = canvas.getContext('2d');
-
-            // === 3. دالة الرسم (مع ضبط الوسيط) ===
-            function drawVerse(text) {
-                ctx.fillStyle = "#000000";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                if (!text) return;
-
-                ctx.fillStyle = "#FFD700";
-                const fontSize = Math.floor(canvas.width / 20); // حجم خط مناسب
-                ctx.font = `500 ${fontSize}px 'Noto Naskh Arabic', 'Amiri Quran', serif`;
-                ctx.textAlign = "center";
-                ctx.textBaseline = "middle";
-
-                const maxWidth = canvas.width - 100;
-                const words = text.split(' ');
-                const lines = [];
-                let currentLine = "";
-
-                for (const word of words) {
-                    const testLine = currentLine + (currentLine ? " " : "") + word;
-                    if (ctx.measureText(testLine).width > maxWidth && currentLine.length > 0) {
-                        lines.push(currentLine);
-                        currentLine = word;
-                    } else {
-                        currentLine = testLine;
-                    }
-                }
-                if (currentLine) lines.push(currentLine);
-
-                const lineHeight = fontSize * 1.4;
-                const totalHeight = lines.length * lineHeight;
-                // 🔥 التصحيح: حساب startY بحيث يكون النص في المنتصف تماماً
-                const startY = (canvas.height - totalHeight) / 2;
-
-                lines.forEach((line, idx) => {
-                    ctx.fillText(line, canvas.width / 2, startY + idx * lineHeight);
-                });
+            // === 2. إنشاء ملف SRT للتوقيتات ===
+            let srtContent = "";
+            let currentTime = 0;
+            for (const verse of verses) {
+                const start = verse.start;
+                const end = verse.end;
+                // تحويل إلى صيغة SRT (ساعات:دقائق:ثواني,ميلي)
+                const startStr = formatTime(start);
+                const endStr = formatTime(end);
+                srtContent += `${verses.indexOf(verse) + 1}\n${startStr} --> ${endStr}\n${verse.text}\n\n`;
             }
 
-            // رسم أول آية فوراً
-            drawVerse(verses[0].text);
+            const srtBlob = new Blob([srtContent], { type: 'text/plain' });
+            const srtBuffer = await srtBlob.arrayBuffer();
+            await ffmpeg.writeFile('subtitles.srt', new Uint8Array(srtBuffer));
 
-            // === 4. إعداد التدفق الصوتي والمرئي ===
-            const stream = canvas.captureStream(30);
+            updateProgress(30, "جاري إنشاء الفيديو...");
 
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const audioElem = new Audio(audioLocalUrl);
-            const source = audioCtx.createMediaElementSource(audioElem);
-            const dest = audioCtx.createMediaStreamDestination();
-            source.connect(dest);
-            source.connect(audioCtx.destination);
-
-            const combinedStream = new MediaStream();
-            stream.getVideoTracks().forEach(t => combinedStream.addTrack(t));
-            dest.stream.getAudioTracks().forEach(t => combinedStream.addTrack(t));
-
-            // === 5. بدء التسجيل فوراً (لا ننتظر تحميل الصوت بالكامل) ===
-            const recorder = new MediaRecorder(combinedStream, { mimeType: 'video/webm' });
-            const chunks = [];
-            recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
-
-            recorder.start();
-            await audioCtx.resume();
-
-            // تشغيل الصوت مع بدء التسجيل (لا ننتظر تحميله بالكامل)
-            audioElem.play().catch(e => console.warn("تشغيل الصوت:", e));
-
-            updateProgress(30, "جاري التسجيل...");
-
-            // === 6. حلقة المزامنة ===
-            let currentVerse = -1;
+            // === 3. إنشاء فيديو باستخدام FFmpeg ===
+            // خلفية سوداء مع النص المترجم
             const totalDuration = verses[verses.length - 1].end;
-            let startTime = performance.now();
+            await ffmpeg.exec([
+                '-f', 'lavfi',
+                '-i', `color=c=black:s=1280x720:d=${totalDuration + 1}`,
+                '-i', 'input.mp3',
+                '-vf', `subtitles=subtitles.srt:force_style='FontName=Noto Naskh Arabic,FontSize=36,PrimaryColour=&HFFD700&,Alignment=10,Outline=1,Shadow=1'`,
+                '-c:v', 'libx264',
+                '-c:a', 'aac',
+                '-pix_fmt', 'yuv420p',
+                '-shortest',
+                'output.mp4'
+            ]);
 
-            const syncLoop = () => {
-                const currentTime = audioElem.currentTime || (performance.now() - startTime) / 1000;
-                let newIndex = -1;
+            updateProgress(80, "تجهيز الملف النهائي...");
 
-                for (let i = 0; i < verses.length; i++) {
-                    if (currentTime >= verses[i].start && currentTime <= verses[i].end) {
-                        newIndex = i;
-                        break;
-                    }
-                }
+            // === 4. قراءة الملف الناتج وتحميله ===
+            const data = await ffmpeg.readFile('output.mp4');
+            const blob = new Blob([data.buffer], { type: 'video/mp4' });
+            const url = URL.createObjectURL(blob);
 
-                if (newIndex !== currentVerse) {
-                    currentVerse = newIndex;
-                    drawVerse(currentVerse !== -1 ? verses[currentVerse].text : "");
-                }
-
-                const percent = 20 + (Math.min(currentTime, totalDuration) / totalDuration) * 75;
-                updateProgress(percent, `جاري التسجيل... ${Math.floor(currentTime)}/${Math.floor(totalDuration)} ثانية`);
-
-                if (!audioElem.ended && !audioElem.paused) {
-                    requestAnimationFrame(syncLoop);
-                } else if (audioElem.ended) {
-                    // انتهى الصوت، ننهي التسجيل
-                    updateProgress(96, "تجهيز الملف النهائي...");
-                    setTimeout(() => {
-                        if (recorder.state === 'recording') recorder.stop();
-                    }, 200);
-                } else {
-                    // في حالة التوقف المفاجئ
-                    requestAnimationFrame(syncLoop);
-                }
-            };
-
-            // بدء حلقة المزامنة
-            requestAnimationFrame(syncLoop);
-
-            // في حال انتهى الصوت
-            audioElem.onended = () => {
-                updateProgress(96, "تجهيز الملف النهائي...");
-                setTimeout(() => {
-                    if (recorder.state === 'recording') recorder.stop();
-                }, 200);
-            };
-
-            // انتظار انتهاء التسجيل
-            await new Promise(resolve => { recorder.onstop = resolve; });
-
-            // === 7. تحميل الفيديو النهائي ===
-            const finalBlob = new Blob(chunks, { type: 'video/webm' });
-            const url = URL.createObjectURL(finalBlob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `الفاتحة_${fromSelect.value}_الى_${toSelect.value}.webm`;
+            a.download = `الفاتحة_${fromSelect.value}_الى_${toSelect.value}.mp4`;
             a.click();
 
-            URL.revokeObjectURL(audioLocalUrl);
             URL.revokeObjectURL(url);
-            audioCtx.close();
 
             updateProgress(100, "تم التحميل بنجاح!");
             stopIstighfar();
@@ -479,12 +434,22 @@
 
         } catch (error) {
             console.error("خطأ:", error);
-            statusMsg.textContent = "حدث خطأ، حاول مرة أخرى";
+            statusMsg.textContent = "حدث خطأ، حاول مرة أخرى: " + error.message;
             stopIstighfar();
             generateBtn.disabled = false;
         }
     }
 
+    // ==================== دالة تحويل الوقت إلى صيغة SRT ====================
+    function formatTime(seconds) {
+        const hrs = Math.floor(seconds / 3600);
+        const mins = Math.floor((seconds % 3600) / 60);
+        const secs = Math.floor(seconds % 60);
+        const ms = Math.floor((seconds % 1) * 1000);
+        return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')},${String(ms).padStart(3, '0')}`;
+    }
+
+    // ==================== ربط الزر ====================
     generateBtn.onclick = generateVideo;
 </script>
 </body>
