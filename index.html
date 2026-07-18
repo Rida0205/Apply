@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>econcours.ma - التسجيل في المباريات والمنح</title>
+    <title>econcours.ma | التسجيل في المباريات والمنح</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- خطوط عصرية وجميلة -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -18,75 +17,126 @@
         }
 
         body {
-            background: #ffffff;
-            color: #1e293b;
+            background: #fcfcfd;
+            color: #0b1a33;
+            line-height: 1.6;
         }
 
-        /* Header أنيق */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
         header {
-            padding: 1.2rem 5%;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            padding: 1rem 5%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
             position: sticky;
             top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .header-content {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
 
         .logo h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #1e293b, #334155);
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #0b1a33 0%, #1e3a5f 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -0.5px;
         }
 
         .logo p {
+            font-size: 0.8rem;
             color: #64748b;
-            font-size: 0.85rem;
+            margin-top: -4px;
             font-weight: 400;
-            margin-top: -5px;
         }
 
         nav {
             display: flex;
-            gap: 2.5rem;
+            gap: 2.2rem;
+            align-items: center;
         }
 
         nav a {
-            color: #475569;
+            color: #1e293b;
             text-decoration: none;
             font-weight: 500;
             font-size: 1rem;
-            transition: color 0.2s;
+            transition: all 0.2s ease;
+            position: relative;
+            padding: 0.25rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: #d97706;
+            transition: width 0.3s ease;
         }
 
         nav a:hover {
             color: #d97706;
         }
 
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #334155;
+        nav a:hover::after {
+            width: 100%;
         }
 
-        /* Hero Section - جديدة */
+        .btn-wa-header {
+            background: #25D366;
+            color: white !important;
+            padding: 0.5rem 1.4rem !important;
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-wa-header::after {
+            display: none !important;
+        }
+
+        .btn-wa-header:hover {
+            background: #1da851;
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
+            color: white !important;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #0b1a33;
+            background: none;
+            border: none;
+            padding: 0.25rem;
+        }
+
+        /* Hero */
         .hero {
             padding: 5rem 5% 6rem;
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            background: linear-gradient(160deg, #f8fafc 0%, #ffffff 100%);
             position: relative;
             overflow: hidden;
         }
@@ -94,82 +144,130 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(217,119,6,0.03) 0%, transparent 70%);
+            top: -30%;
+            right: -15%;
+            width: 70%;
+            height: 180%;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.04) 0%, transparent 70%);
             border-radius: 50%;
+            pointer-events: none;
         }
 
         .hero-content {
-            max-width: 900px;
+            max-width: 920px;
             margin: 0 auto;
             text-align: center;
             position: relative;
             z-index: 2;
         }
 
-        .hero h2 {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #0f172a;
+        .hero-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #d97706;
+            padding: 0.4rem 1.6rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
             margin-bottom: 1.5rem;
-            line-height: 1.4;
+            border: 1px solid rgba(217, 119, 6, 0.15);
+        }
+
+        .hero h2 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #0b1a33;
+            margin-bottom: 1.2rem;
+            line-height: 1.3;
         }
 
         .hero h2 span {
             color: #d97706;
-            display: inline-block;
             position: relative;
+            display: inline-block;
         }
 
         .hero h2 span::after {
             content: '';
             position: absolute;
-            bottom: 5px;
-            left: 0;
+            bottom: 6px;
+            right: 0;
             width: 100%;
-            height: 8px;
-            background: rgba(217, 119, 6, 0.15);
+            height: 10px;
+            background: rgba(217, 119, 6, 0.12);
             z-index: -1;
+            border-radius: 4px;
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             color: #475569;
             max-width: 700px;
             margin: 0 auto 2.5rem;
-            line-height: 1.7;
+            line-height: 1.8;
             font-weight: 400;
         }
 
-        .hero .btn {
-            background: #0f172a;
-            color: white;
-            padding: 1rem 3rem;
-            font-size: 1.1rem;
-            font-weight: 500;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.1);
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
             margin-top: 1rem;
         }
 
-        .hero .btn:hover {
-            background: #d97706;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.2);
+        .btn-primary {
+            background: #0b1a33;
+            color: white;
+            padding: 0.9rem 2.8rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 4px 16px rgba(11, 26, 51, 0.12);
         }
 
-        /* Services Section */
+        .btn-primary:hover {
+            background: #d97706;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(217, 119, 6, 0.20);
+            color: white;
+        }
+
+        .btn-wa-hero {
+            background: #25D366;
+            color: white;
+            padding: 0.9rem 2.8rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.18);
+        }
+
+        .btn-wa-hero:hover {
+            background: #1da851;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(37, 211, 102, 0.25);
+            color: white;
+        }
+
+        /* Services */
         .services {
-            padding: 5rem 5%;
-            max-width: 1200px;
+            padding: 5rem 5% 4rem;
+            max-width: 1280px;
             margin: 0 auto;
         }
 
@@ -179,65 +277,68 @@
         }
 
         .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 0.5rem;
-            position: relative;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #0b1a33;
             display: inline-block;
+            position: relative;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
             bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 64px;
+            height: 4px;
             background: #d97706;
-            border-radius: 2px;
+            border-radius: 4px;
         }
 
         .section-subtitle {
             color: #64748b;
             font-size: 1.1rem;
-            margin-top: 1.5rem;
+            margin-top: 1.8rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 4rem;
         }
 
         .service-card {
             background: white;
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 2.5rem 2rem;
-            transition: all 0.3s;
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             border: 1px solid #f1f5f9;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
 
         .service-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
             right: 0;
+            left: 0;
             height: 4px;
             background: linear-gradient(90deg, #d97706, #fbbf24);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.4s;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: #e2e8f0;
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+            box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.10);
         }
 
         .service-card:hover::before {
@@ -245,58 +346,76 @@
         }
 
         .service-icon {
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: #d97706;
-            margin-bottom: 1.5rem;
             background: #fef3c7;
-            width: 60px;
-            height: 60px;
+            width: 64px;
+            height: 64px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 16px;
+            border-radius: 18px;
+            margin-bottom: 1.5rem;
         }
 
         .service-card h3 {
             font-size: 1.6rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #0f172a;
-        }
-
-        .price {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #d97706;
-            margin: 1rem 0;
-            display: flex;
-            align-items: baseline;
-            gap: 0.25rem;
-        }
-
-        .price small {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #64748b;
+            color: #0b1a33;
+            margin-bottom: 0.3rem;
         }
 
         .badge {
             display: inline-block;
             background: #f1f5f9;
             color: #475569;
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            letter-spacing: 0.4px;
+            margin-bottom: 0.75rem;
+        }
+
+        .price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #d97706;
+            margin: 0.75rem 0 1rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .price small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #94a3b8;
+        }
+
+        .price .old-price {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            text-decoration: line-through;
+            font-weight: 500;
+            margin-right: 0.5rem;
+        }
+
+        .discount-badge {
+            background: #ef4444;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.8rem;
             border-radius: 30px;
-            margin-bottom: 1rem;
-            letter-spacing: 0.3px;
+            margin-right: 0.5rem;
         }
 
         .service-card p {
             color: #475569;
             margin-bottom: 1.5rem;
             line-height: 1.7;
-            font-size: 1rem;
         }
 
         .service-features {
@@ -306,8 +425,8 @@
         }
 
         .service-features li {
-            color: #334155;
-            margin-bottom: 0.8rem;
+            color: #1e293b;
+            margin-bottom: 0.7rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
@@ -316,23 +435,24 @@
 
         .service-features i {
             color: #10b981;
-            font-size: 0.9rem;
-            width: 18px;
+            font-size: 0.85rem;
+            width: 20px;
         }
 
-        /* Extra Services */
+        /* Extra */
         .extra-services {
             background: #f8fafc;
-            border-radius: 32px;
-            padding: 3rem;
+            border-radius: 36px;
+            padding: 3rem 2.5rem;
             margin-top: 2rem;
+            border: 1px solid #f1f5f9;
         }
 
         .extra-title {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 0.5rem;
+            color: #0b1a33;
+            margin-bottom: 0.25rem;
         }
 
         .extra-note {
@@ -352,11 +472,13 @@
             padding: 1.8rem 1.5rem;
             text-align: center;
             transition: all 0.3s;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e9edf2;
         }
 
         .extra-item:hover {
             border-color: #d97706;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.06);
         }
 
         .extra-item i {
@@ -367,9 +489,9 @@
 
         .extra-item h4 {
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #0f172a;
-            font-size: 1.2rem;
+            color: #0b1a33;
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
         }
 
         .extra-item p {
@@ -379,8 +501,8 @@
 
         /* Free Section */
         .free-section {
-            padding: 5rem 5%;
-            background: #0f172a;
+            padding: 4rem 5%;
+            background: #0b1a33;
             position: relative;
             overflow: hidden;
         }
@@ -388,16 +510,17 @@
         .free-section::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
+            top: -40%;
+            left: -10%;
+            width: 70%;
             height: 200%;
-            background: radial-gradient(circle, rgba(217,119,6,0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.04) 0%, transparent 70%);
             border-radius: 50%;
+            pointer-events: none;
         }
 
         .free-content {
-            max-width: 700px;
+            max-width: 780px;
             margin: 0 auto;
             text-align: center;
             position: relative;
@@ -405,70 +528,94 @@
         }
 
         .free-content h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            font-weight: 800;
             color: white;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .free-content .hadith {
-            font-size: 2rem;
-            color: #d97706;
-            margin: 2rem 0;
-            line-height: 1.6;
-            font-weight: 600;
-            background: rgba(255,255,255,0.03);
-            padding: 2rem;
-            border-radius: 40px;
-            border: 1px solid rgba(217,119,6,0.2);
+            font-size: 1.3rem;
+            color: #fbbf24;
+            margin: 1.2rem 0;
+            line-height: 1.5;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.2rem 1.5rem;
+            border-radius: 30px;
+            border: 1px solid rgba(217, 119, 6, 0.12);
+            display: inline-block;
         }
 
         .free-content p {
             color: #cbd5e1;
-            font-size: 1.1rem;
-            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
             line-height: 1.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .free-contact {
-            background: rgba(255,255,255,0.03);
-            padding: 2rem;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 1.5rem 2rem;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
             display: inline-block;
-            min-width: 300px;
+            min-width: 260px;
         }
 
         .free-contact p {
-            margin-bottom: 1rem;
-            color: white;
-            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
         }
 
         .free-contact i {
+            color: #fbbf24;
+            font-size: 1.1rem;
+        }
+
+        .free-contact a {
+            color: #fbbf24;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .free-contact a:hover {
             color: #d97706;
-            margin-left: 0.75rem;
-            font-size: 1.2rem;
+        }
+
+        .ltr-number {
+            direction: ltr;
+            unicode-bidi: embed;
+            display: inline-block;
         }
 
         /* Contact */
         .contact {
-            padding: 5rem 5%;
-            background: #ffffff;
+            padding: 5rem 5% 4rem;
+            background: white;
         }
 
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1.5rem;
-            max-width: 900px;
+            max-width: 700px;
             margin: 3rem auto 0;
         }
 
         .contact-item {
             background: #f8fafc;
             border-radius: 24px;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             transition: all 0.3s;
             border: 1px solid #f1f5f9;
@@ -477,63 +624,146 @@
         .contact-item:hover {
             border-color: #d97706;
             background: white;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.06);
         }
 
         .contact-item i {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #d97706;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .contact-item h4 {
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #0f172a;
+            color: #0b1a33;
+            margin-bottom: 0.3rem;
         }
 
         .contact-item a {
-            color: #64748b;
+            color: #475569;
             text-decoration: none;
             font-size: 1rem;
             transition: color 0.2s;
+            word-break: break-all;
         }
 
         .contact-item a:hover {
             color: #d97706;
         }
 
+        .contact-item .ltr-number {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0b1a33;
+        }
+
         /* Footer */
         footer {
-            padding: 3rem 5%;
-            background: #ffffff;
+            padding: 3rem 5% 2.5rem;
+            background: white;
             border-top: 1px solid #f1f5f9;
             text-align: center;
         }
 
         .footer-logo {
             font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #0f172a, #334155);
+            font-weight: 800;
+            background: linear-gradient(135deg, #0b1a33, #1e3a5f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1rem;
-            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
         }
 
         .footer-hadith {
             color: #d97706;
-            font-size: 1.2rem;
-            margin: 1.5rem 0;
+            font-size: 1.1rem;
+            margin: 1.2rem 0;
             font-weight: 500;
         }
 
         .footer-copy {
             color: #94a3b8;
             font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* WhatsApp Floating Button */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.35);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .wa-float:hover {
+            transform: scale(1.08);
+            background: #1da851;
+            box-shadow: 0 8px 40px rgba(37, 211, 102, 0.45);
+        }
+
+        .wa-float .tooltip {
+            position: absolute;
+            left: 75px;
+            background: #0b1a33;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .wa-float:hover .tooltip {
+            opacity: 1;
+            left: 85px;
+        }
+
+        @media (max-width: 480px) {
+            .wa-float {
+                width: 55px;
+                height: 55px;
+                font-size: 1.8rem;
+                bottom: 20px;
+                left: 20px;
+            }
+            .wa-float .tooltip {
+                display: none;
+            }
         }
 
         /* Responsive */
+        @media (max-width: 900px) {
+            .hero h2 {
+                font-size: 2.6rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .free-content .hadith {
+                font-size: 1.1rem;
+                padding: 1rem 1.2rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
@@ -543,41 +773,49 @@
                 display: none;
                 position: absolute;
                 top: 100%;
-                left: 0;
                 right: 0;
-                background: white;
+                left: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(12px);
                 flex-direction: column;
-                padding: 2rem;
-                gap: 1rem;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                padding: 2rem 2rem 2.5rem;
+                gap: 1.2rem;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
                 border-bottom: 1px solid #f1f5f9;
+                border-radius: 0 0 24px 24px;
             }
 
             nav.active {
                 display: flex;
             }
 
-            .hero h2 {
-                font-size: 2rem;
+            nav a {
+                font-size: 1.1rem;
             }
 
-            .hero p {
-                font-size: 1.1rem;
-                padding: 0 1rem;
+            .btn-wa-header {
+                width: 100%;
+                justify-content: center;
+                padding: 0.7rem !important;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
             }
 
             .section-title {
+                font-size: 2rem;
+            }
+
+            .free-content h2 {
                 font-size: 1.8rem;
             }
 
-            .free-content .hadith {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .service-card {
-                padding: 2rem 1.5rem;
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .extra-services {
@@ -589,55 +827,108 @@
                 width: 100%;
             }
         }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn-primary,
+            .btn-wa-hero {
+                width: 100%;
+                justify-content: center;
+                padding: 0.8rem 1.5rem;
+            }
+            .service-card {
+                padding: 2rem 1.2rem;
+            }
+            .free-content .hadith {
+                font-size: 1rem;
+                padding: 0.8rem 1rem;
+            }
+            .free-content p {
+                font-size: 0.95rem;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .logo h1 {
+                font-size: 1.6rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/212644455893?text=مرحباً%20أريد%20التسجيل" target="_blank" class="wa-float" aria-label="تواصل عبر واتساب">
+        <i class="fab fa-whatsapp"></i>
+        <span class="tooltip">تواصل معنا</span>
+    </a>
+
     <header>
         <div class="header-content">
             <div class="logo">
                 <h1>econcours.ma</h1>
                 <p>التسجيل في المباريات والمنح</p>
             </div>
-            <div class="menu-toggle" onclick="toggleMenu()">
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="القائمة">
                 <i class="fas fa-bars"></i>
-            </div>
+            </button>
             <nav id="mainNav">
                 <a href="#home">الرئيسية</a>
                 <a href="#services">الخدمات</a>
                 <a href="#free">التسجيل المجاني</a>
                 <a href="#contact">اتصل بنا</a>
+                <a href="https://wa.me/212644455893?text=مرحباً%20أريد%20التسجيل%20في%20مباراة" target="_blank" class="btn-wa-header">
+                    <i class="fab fa-whatsapp"></i> واتساب
+                </a>
             </nav>
         </div>
     </header>
 
     <section class="hero" id="home">
         <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-graduation-cap"></i> خدمات متميزة</div>
             <h2>
-                <span>ضع ملفك بين أيدينا</span><br>نحن نتكفل بتسجيلك في كل الفرص
+                <span>ضع ملفك بين أيدينا</span><br>
+                نحن نتكفل بتسجيلك في كل الفرص
             </h2>
             <p>فريق متخصص في التسجيل الإلكتروني للمباريات العمومية والمنح الدراسية والتدريب المهني. نوفر لك الوقت والجهد ونسهل لك الوصول إلى فرصتك</p>
-            
-            <a href="#services" class="btn">اطلع على خدماتنا</a>
+            <div class="hero-actions">
+                <a href="#services" class="btn-primary"><i class="fas fa-arrow-left"></i> اطلع على خدماتنا</a>
+                <a href="https://wa.me/212644455893?text=مرحباً%20أريد%20التسجيل%20في%20مباراة" target="_blank" class="btn-wa-hero">
+                    <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
+                </a>
+            </div>
         </div>
     </section>
 
     <section class="services" id="services">
         <div class="section-header">
             <h2 class="section-title">خدماتنا</h2>
-            <p class="section-subtitle">اختر الخدمة التي تناسب احتياجاتك وبأسعار مناسبة للجميع</p>
+            <p class="section-subtitle">اختر الخدمة المناسبة لك بأسعار تناسب الجميع، مع دعم متواصل</p>
         </div>
-        
+
         <div class="services-grid">
             <!-- Service 1: التسجيل الفوري -->
             <div class="service-card">
                 <div class="service-icon"><i class="fas fa-bolt"></i></div>
                 <span class="badge">خدمة فورية</span>
                 <h3>التسجيل الفوري</h3>
-                <div class="price">20 <small>درهم</small></div>
-                <p>تختار مباراة، منحة دراسية، أو أي فرصة متاحة، ونحن نسجلك فيها مباشرة.</p>
+                <div class="price">
+                    <span>50 <small>درهم</small></span>
+                    <span class="old-price">80 درهم</span>
+                    <span class="discount-badge">-30%</span>
+                </div>
+                <p>تختار المباراة أو المنحة، ونحن نسجلك فيها مباشرة بدقة واحترافية.</p>
                 <ul class="service-features">
-                    <li><i class="fas fa-check"></i> تسجيل كامل في الفرصة المختارة</li>
-                    <li><i class="fas fa-check"></i> تعبئة جميع الاستمارات بدقة</li>
+                    <li><i class="fas fa-check"></i> تعبئة جميع الاستمارات</li>
                     <li><i class="fas fa-check"></i> رفع الوثائق بالصيغ المطلوبة</li>
                     <li><i class="fas fa-check"></i> إرسال إثبات التسجيل</li>
                 </ul>
@@ -648,12 +939,15 @@
                 <div class="service-icon"><i class="fas fa-calendar-alt"></i></div>
                 <span class="badge">الأكثر طلباً</span>
                 <h3>اشتراك 6 أشهر</h3>
-                <div class="price">50 <small>درهم</small></div>
-                <p>نسجل لك في جميع المباريات المنشورة خلال 6 أشهر، مع تتبع المباريات التي تناسب شهاداتك.</p>
+                <div class="price">
+                    <span>100 <small>درهم</small></span>
+                    <span class="old-price">150 درهم</span>
+                    <span class="discount-badge">-33%</span>
+                </div>
+                <p>تسجيل غير محدود في جميع المباريات المنشورة خلال 6 أشهر، مع تتبع مخصص.</p>
                 <ul class="service-features">
-                    <li><i class="fas fa-check"></i> تسجيل غير محدود في كل المباريات</li>
+                    <li><i class="fas fa-check"></i> تسجيل غير محدود</li>
                     <li><i class="fas fa-check"></i> تتبع المباريات حسب مؤهلاتك</li>
-                    <li><i class="fas fa-check"></i> ترشيح المباريات المناسبة</li>
                     <li><i class="fas fa-check"></i> جميع الخدمات الإضافية مشمولة</li>
                 </ul>
             </div>
@@ -663,22 +957,23 @@
                 <div class="service-icon"><i class="fas fa-calendar-check"></i></div>
                 <span class="badge">الأفضل قيمة</span>
                 <h3>اشتراك 12 شهر</h3>
-                <div class="price">100 <small>درهم</small></div>
-                <p>نسجل لك في جميع المباريات المنشورة خلال سنة كاملة، مع تتبع احترافي حسب تخصصك.</p>
+                <div class="price">
+                    <span>150 <small>درهم</small></span>
+                    <span class="old-price">200 درهم</span>
+                    <span class="discount-badge">-25%</span>
+                </div>
+                <p>تسجيل غير محدود في جميع المباريات لمدة سنة كاملة، مع متابعة احترافية.</p>
                 <ul class="service-features">
                     <li><i class="fas fa-check"></i> تسجيل غير محدود طوال السنة</li>
-                    <li><i class="fas fa-check"></i> تتبع احترافي لكل المباريات</li>
                     <li><i class="fas fa-check"></i> تنبيهات وترشيحات مستمرة</li>
                     <li><i class="fas fa-check"></i> أولوية في المعالجة</li>
                 </ul>
             </div>
         </div>
 
-        <!-- الخدمات الإضافية -->
         <div class="extra-services">
-            <h3 class="extra-title">خدمات إضافية</h3>
-            <p class="extra-note">مشمولة مجاناً في الاشتراكات (6 و12 شهر)</p>
-            
+            <h3 class="extra-title">خدمات إضافية مجانية</h3>
+            <p class="extra-note">مشمولة في الاشتراكات (6 و12 شهراً) لتعزيز ملفك المهني</p>
             <div class="extra-grid">
                 <div class="extra-item">
                     <i class="fas fa-file-alt"></i>
@@ -692,8 +987,13 @@
                 </div>
                 <div class="extra-item">
                     <i class="fas fa-compass"></i>
-                    <h4>التوجيه</h4>
-                    <p>نصائح مهنية مخصصة</p>
+                    <h4>التوجيه المهني</h4>
+                    <p>نصائح مخصصة لمسارك</p>
+                </div>
+                <div class="extra-item">
+                    <i class="fas fa-bell"></i>
+                    <h4>الإشعار الفوري</h4>
+                    <p>تنبيه فوري بفرص العمل المناسبة لملفك</p>
                 </div>
             </div>
         </div>
@@ -703,10 +1003,10 @@
         <div class="free-content">
             <h2>التسجيل المجاني</h2>
             <div class="hadith">"الله في عون العبد ما دام العبد في عون أخيه"</div>
-            <p>إذا كنت لا تستطيع الدفع مالياً، سنقوم بتسجيلك مجاناً في المباراة أو المنحة التي تختارها. لا تدع الظروف المادية تحرمك من فرصتك.</p>
+            <p>إذا كنت تواجه صعوبات مالية، سنقوم بتسجيلك مجاناً في المباراة أو المنحة التي تختارها. لا تدع الظروف تحرمك من فرصتك.</p>
             <div class="free-contact">
-                <p><i class="fab fa-whatsapp"></i> واتساب: [أدخل الرقم]</p>
-                <p><i class="far fa-envelope"></i> البريد: [أدخل البريد]</p>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/212644455893?text=مرحباً%20أريد%20التسجيل%20المجاني" target="_blank" class="ltr-number">+212 644-455893</a></p>
+                <p><i class="far fa-envelope"></i> <a href="mailto:contact@econcours.ma">contact@econcours.ma</a></p>
             </div>
         </div>
     </section>
@@ -714,24 +1014,19 @@
     <section class="contact" id="contact">
         <div class="section-header">
             <h2 class="section-title">تواصل معنا</h2>
-            <p class="section-subtitle">نحن هنا للإجابة على استفساراتك</p>
+            <p class="section-subtitle">نحن هنا للإجابة على استفساراتك ومساعدتك</p>
         </div>
-        
+
         <div class="contact-grid">
             <div class="contact-item">
                 <i class="fab fa-whatsapp"></i>
                 <h4>واتساب</h4>
-                <a href="#">[أدخل الرقم]</a>
+                <a href="https://wa.me/212644455893?text=مرحباً%20أريد%20التسجيل" target="_blank" class="ltr-number">+212 644-455893</a>
             </div>
             <div class="contact-item">
                 <i class="far fa-envelope"></i>
                 <h4>البريد الإلكتروني</h4>
-                <a href="#">[أدخل البريد]</a>
-            </div>
-            <div class="contact-item">
-                <i class="fab fa-instagram"></i>
-                <h4>إنستغرام</h4>
-                <a href="#">[الحساب]</a>
+                <a href="mailto:contact@econcours.ma">contact@econcours.ma</a>
             </div>
         </div>
     </section>
@@ -739,7 +1034,7 @@
     <footer>
         <div class="footer-logo">econcours.ma</div>
         <div class="footer-hadith">الله في عون العبد ما دام العبد في عون أخيه</div>
-        <div class="footer-copy">© 2024 econcours.ma - جميع الحقوق محفوظة</div>
+        <div class="footer-copy">© 2026 econcours.ma - جميع الحقوق محفوظة</div>
     </footer>
 
     <script>
@@ -752,6 +1047,14 @@
             link.addEventListener('click', () => {
                 document.getElementById('mainNav').classList.remove('active');
             });
+        });
+
+        document.addEventListener('click', function (e) {
+            const nav = document.getElementById('mainNav');
+            const toggle = document.querySelector('.menu-toggle');
+            if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+                nav.classList.remove('active');
+            }
         });
     </script>
 </body>
